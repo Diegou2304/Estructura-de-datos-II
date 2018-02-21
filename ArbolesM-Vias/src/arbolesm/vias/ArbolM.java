@@ -184,14 +184,14 @@ public class ArbolM {
         InOrden(this.raiz, jta);
 
     }
-    private void PostOrden(JTextArea jta)
+    public void PostOrden(JTextArea jta)
     {
         PostOrden(this.raiz,jta);
         
     }
-    public void PostOrden(Nodo P, JTextArea jta)
+    private void PostOrden(Nodo P, JTextArea jta)
     {
-         if (P == null) {
+        if (P == null) {//Si la raiz es nula. entonces no hace nada
             return;
         } else {
             if (esHoja(P)) {
@@ -202,13 +202,22 @@ public class ArbolM {
                     i++;
                 }
             } else {
+                 
                 for (int i = 1; i <= P.M - 1; i++) {
-                    InOrden(P.getHijo(i), jta);
+                    
+                    PostOrden(P.getHijo(i), jta);
+                   
+                    
+                }
+                PostOrden(P.getHijo(P.M), jta);
+                for(int i=1;i<P.M;i++)
+                {
                     jta.append(String.valueOf(P.getElem(i) + " "));
                 }
-                InOrden(P.getHijo(P.M), jta);
             }
         }
+        
+        
         
     }
 }
