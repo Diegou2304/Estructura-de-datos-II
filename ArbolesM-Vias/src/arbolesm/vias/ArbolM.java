@@ -220,4 +220,41 @@ public class ArbolM {
         
         
     }
+    public int Altura()//A diferencia de las otras funciones esta funcion nos tiene que devolver un resultado de un proceso no mostrarnos el principio
+    {
+        return Altura(this.raiz);//
+    }
+    private int Altura(Nodo P)
+    {
+        if(P==null)//Si no existe el arbol
+        {
+            return 0;
+            
+        }
+        else
+        {
+            if(esHoja(P))
+            {
+                return 1;
+            }
+            else
+            {
+                int acu=0;
+                int d;
+                for(int i=1;i<=P.M;i++)
+                {
+                    d=Altura(P.getHijo(i));//Obtenemos el hijo correspondiente de la raiz
+                    
+                    if(acu<d)
+                    {
+                        acu=d;
+                    }
+                   
+                 
+                }
+                return acu+1;
+                
+            }
+        }
+    }
 }
