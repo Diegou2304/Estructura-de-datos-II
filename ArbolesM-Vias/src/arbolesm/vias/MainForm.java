@@ -34,6 +34,9 @@ public class MainForm extends javax.swing.JFrame {
         Inorden = new javax.swing.JTextArea();
         PreOrden = new javax.swing.JButton();
         PostOrden = new javax.swing.JButton();
+        Altura = new javax.swing.JButton();
+        Suma = new javax.swing.JButton();
+        Buscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,6 +66,32 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         PostOrden.setText("POSTORDEN");
+        PostOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PostOrdenActionPerformed(evt);
+            }
+        });
+
+        Altura.setText("ALTURA");
+        Altura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AlturaActionPerformed(evt);
+            }
+        });
+
+        Suma.setText("SUMA ELEMENTOS");
+        Suma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SumaActionPerformed(evt);
+            }
+        });
+
+        Buscar.setText("BUSCAR");
+        Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -71,17 +100,25 @@ public class MainForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Insertar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PreOrden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Insertar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(PostOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 14, Short.MAX_VALUE))
-                            .addComponent(INORDEN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(11, 11, 11)))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(360, 360, 360))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(PreOrden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(PostOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 14, Short.MAX_VALUE))
+                                    .addComponent(INORDEN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(11, 11, 11)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(360, 360, 360))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Altura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Suma, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                            .addComponent(Buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,7 +134,13 @@ public class MainForm extends javax.swing.JFrame {
                         .addComponent(INORDEN)
                         .addGap(18, 18, 18)
                         .addComponent(PostOrden)))
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Altura)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Suma)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Buscar)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -129,6 +172,39 @@ public class MainForm extends javax.swing.JFrame {
         Inorden.setText("");
         arbol.PreOrden(Inorden); 
     }//GEN-LAST:event_PreOrdenActionPerformed
+
+    private void PostOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PostOrdenActionPerformed
+        // TODO add your handling code here:
+          Inorden.setText("");
+        arbol.PostOrden(Inorden);
+        
+    }//GEN-LAST:event_PostOrdenActionPerformed
+
+    private void AlturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlturaActionPerformed
+        // TODO add your handling code here:
+        Inorden.setText(String.valueOf(arbol.Altura()));
+    }//GEN-LAST:event_AlturaActionPerformed
+
+    private void SumaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SumaActionPerformed
+        // TODO add your handling code here:
+        Inorden.setText("");
+        Inorden.setText(String.valueOf(arbol.SumaElementos()));
+    }//GEN-LAST:event_SumaActionPerformed
+
+    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
+        // TODO add your handling code here:
+       
+       if(arbol.Existe(Integer.parseInt(Inorden.getText())))
+        {
+            Inorden.setText("Existe");
+                   
+        }
+       else
+       {
+           Inorden.setText("No Existe");
+       }
+               
+    }//GEN-LAST:event_BuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,11 +242,14 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Altura;
+    private javax.swing.JButton Buscar;
     private javax.swing.JButton INORDEN;
     private javax.swing.JTextArea Inorden;
     private javax.swing.JButton Insertar;
     private javax.swing.JButton PostOrden;
     private javax.swing.JButton PreOrden;
+    private javax.swing.JButton Suma;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
