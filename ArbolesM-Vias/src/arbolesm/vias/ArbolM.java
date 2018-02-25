@@ -257,4 +257,70 @@ public class ArbolM {
             }
         }
     }
+    private int SumaElementos(Nodo P)
+    {
+        if(P==null) return 0;
+        else
+        {
+            if(esHoja(P))
+            {
+                return P.SumaE();
+            }
+            else
+            {
+                int s=0;
+                for(int i=1;i<=P.M;i++)
+                {
+                    s+=SumaElementos(P.getHijo(i));
+                    
+                }
+                return s+P.SumaE();            }
+            
+        }
+        
+        
+    }
+    public int SumaElementos()
+    {
+        return SumaElementos(this.raiz);
+    }
+    private boolean Existe(Nodo P,int x)
+    {
+        if(P==null) return false;
+        
+        else
+        {
+           if(P.BuscarElemento(x))//Si el elemento existe
+           {
+               return true;
+           }
+           else
+           {
+               if(esHoja(P))
+               {
+                  return false; 
+               }
+               else
+               {
+                   for(int i=1;i<=P.M;i++)
+                   {
+                      if(Existe(P.getHijo(i),x))
+                       {
+                           return true;
+                       }
+                   }
+                   
+               }
+               return false;
+           }
+            
+            
+            
+        }
+    }
+    public boolean Existe(int x)
+    {
+        return Existe(this.raiz,x);
+    }
+    
 }
