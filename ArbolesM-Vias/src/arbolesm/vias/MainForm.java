@@ -31,12 +31,15 @@ public class MainForm extends javax.swing.JFrame {
         Insertar = new javax.swing.JButton();
         INORDEN = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        Inorden = new javax.swing.JTextArea();
+        Salida = new javax.swing.JTextArea();
         PreOrden = new javax.swing.JButton();
         PostOrden = new javax.swing.JButton();
         Altura = new javax.swing.JButton();
         Suma = new javax.swing.JButton();
         Buscar = new javax.swing.JButton();
+        Niveles = new javax.swing.JButton();
+        SumaNiveles = new javax.swing.JButton();
+        Clear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,9 +57,9 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
-        Inorden.setColumns(20);
-        Inorden.setRows(5);
-        jScrollPane2.setViewportView(Inorden);
+        Salida.setColumns(20);
+        Salida.setRows(5);
+        jScrollPane2.setViewportView(Salida);
 
         PreOrden.setText("PREORDEN");
         PreOrden.addActionListener(new java.awt.event.ActionListener() {
@@ -93,6 +96,27 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
+        Niveles.setText("BUSQUEDA POR NIVELES");
+        Niveles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NivelesActionPerformed(evt);
+            }
+        });
+
+        SumaNiveles.setText("SUMA NIVELES");
+        SumaNiveles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SumaNivelesActionPerformed(evt);
+            }
+        });
+
+        Clear.setText("CLEAR");
+        Clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,46 +125,54 @@ public class MainForm extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Insertar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(PreOrden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(PostOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 14, Short.MAX_VALUE))
-                                    .addComponent(INORDEN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(11, 11, 11)))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(360, 360, 360))
+                        .addComponent(SumaNiveles, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Altura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Suma, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                            .addComponent(Buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(INORDEN, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PreOrden, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Insertar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(Clear)
+                        .addGap(257, 257, 257))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(Buscar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Suma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Altura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(PostOrden, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
+                            .addComponent(Niveles))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Insertar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(PreOrden)
                         .addGap(18, 18, 18)
-                        .addComponent(INORDEN)
-                        .addGap(18, 18, 18)
-                        .addComponent(PostOrden)))
+                        .addComponent(INORDEN))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Clear))
+                .addGap(18, 18, 18)
+                .addComponent(PostOrden)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Altura)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Suma)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Buscar)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(Niveles)
+                .addGap(18, 18, 18)
+                .addComponent(SumaNiveles)
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         pack();
@@ -163,48 +195,70 @@ public class MainForm extends javax.swing.JFrame {
     private void INORDENActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_INORDENActionPerformed
         // TODO add your handling code here:
        
-     Inorden.setText("");
-        arbol.InOrden(Inorden); 
+     Salida.setText("");
+        arbol.InOrden(Salida); 
     }//GEN-LAST:event_INORDENActionPerformed
 
     private void PreOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreOrdenActionPerformed
         // TODO add your handling code here:
-        Inorden.setText("");
-        arbol.PreOrden(Inorden); 
+        Salida.setText("");
+        arbol.PreOrden(Salida); 
     }//GEN-LAST:event_PreOrdenActionPerformed
 
     private void PostOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PostOrdenActionPerformed
         // TODO add your handling code here:
-          Inorden.setText("");
-        arbol.PostOrden(Inorden);
+          Salida.setText("");
+        arbol.PostOrden(Salida);
         
     }//GEN-LAST:event_PostOrdenActionPerformed
 
     private void AlturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlturaActionPerformed
         // TODO add your handling code here:
-        Inorden.setText(String.valueOf(arbol.Altura()));
+        Salida.setText(String.valueOf(arbol.Altura()));
     }//GEN-LAST:event_AlturaActionPerformed
 
     private void SumaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SumaActionPerformed
         // TODO add your handling code here:
-        Inorden.setText("");
-        Inorden.setText(String.valueOf(arbol.SumaElementos()));
+        Salida.setText("");
+        Salida.setText(String.valueOf(arbol.SumaElementos()));
     }//GEN-LAST:event_SumaActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         // TODO add your handling code here:
-       
-       if(arbol.Existe(Integer.parseInt(Inorden.getText())))
+        int dato=Integer.parseInt(JOptionPane.showInputDialog("Introduzca elemento a buscar"));
+        
+       if(arbol.Existe(dato))
         {
-            Inorden.setText("Existe");
-                   
+            JOptionPane.showMessageDialog(null,"EL DATO EXISTE");
+
+            
         }
        else
        {
-           Inorden.setText("No Existe");
+           JOptionPane.showMessageDialog(null,"EL DATO NO EXISTE");
+
        }
                
     }//GEN-LAST:event_BuscarActionPerformed
+
+    private void NivelesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NivelesActionPerformed
+        // TODO add your handling code here:
+        int dato=Integer.parseInt(JOptionPane.showInputDialog("Introduzca el nivel del cual quiere ver los elementos"));
+        Salida.setText(" ");
+        arbol.Nivel(dato, Salida);
+        
+    }//GEN-LAST:event_NivelesActionPerformed
+
+    private void SumaNivelesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SumaNivelesActionPerformed
+        // TODO add your handling code here:
+        int dato=Integer.parseInt(JOptionPane.showInputDialog("Introduzca el nivel para realizar la suma de los mismos"));
+        Salida.setText(" ");
+       Salida.setText(String.valueOf (arbol.SumaNivel(dato)));//Esto retorna un dato
+    }//GEN-LAST:event_SumaNivelesActionPerformed
+
+    private void ClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ClearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,12 +298,15 @@ public class MainForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Altura;
     private javax.swing.JButton Buscar;
+    private javax.swing.JButton Clear;
     private javax.swing.JButton INORDEN;
-    private javax.swing.JTextArea Inorden;
     private javax.swing.JButton Insertar;
+    private javax.swing.JButton Niveles;
     private javax.swing.JButton PostOrden;
     private javax.swing.JButton PreOrden;
+    private javax.swing.JTextArea Salida;
     private javax.swing.JButton Suma;
+    private javax.swing.JButton SumaNiveles;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

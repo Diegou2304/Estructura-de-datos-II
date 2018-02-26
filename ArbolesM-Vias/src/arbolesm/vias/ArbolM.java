@@ -320,7 +320,7 @@ public class ArbolM {
             if(esHoja(P)) return P.BuscarElemento(x);
             else
             {
-                int k=this.getHijoDesc(P,x);
+                int k=this.getHijoDesc(P,x); //Este lo utilizamos para ir por una sola ruta
                 if(k==-1) return true;
                 else
                 {
@@ -335,6 +335,73 @@ public class ArbolM {
     public boolean Existe(int x)
     {
         return Existe(this.raiz,x);
+    }
+    private void Nivel(Nodo P,JTextArea jta,int x)//x representa el nivel
+    {
+        if(this.Altura()<x) return;
+        //Vamoa bajando el nivel hasta encontrar que el nivel es 1, como el deseado
+        if(P==null)
+        {
+            
+            return;
+        }
+        if(x==1)
+        {
+            for (int i = 1; i <= P.CantOcupados(); i++) 
+            {
+                jta.append(P.getElem(i)+" ");
+                
+            }
+        }
+       else
+        {
+             for (int i = 1; i <= P.M; i++) 
+            {
+                Nivel(P.getHijo(i),jta,x-1);
+            
+            }
+        }  
+        
+        
+        
+        
+    }
+    //Hacer suma de nivel, le mandamos el nivel y le mandamos la suma de solo ese nivel
+    public void Nivel(int x,JTextArea jta)
+    {
+        Nivel(this.raiz,jta,x);
+    }
+    private int SumaNivel(Nodo P, int nivel)
+    {
+        if(P==null) return 0;
+        else
+        {
+           
+            if(nivel==1)//Este es el caso mas sencillo
+            {
+               
+                
+                return P.SumaE();//Esa funcion suma todos los elementos del nodo
+            }
+            else
+            {
+                 int suma=0;
+                 for (int i = 1; i <=P.M; i++) 
+                 {
+                     suma+=SumaNivel(P.getHijo(i),nivel-1);
+                    
+                 }
+                return suma;
+                
+                
+            }
+        }
+        
+    
+    }
+    public int SumaNivel(int x)
+    {
+        return SumaNivel(this.raiz,x);
     }
     
 }
