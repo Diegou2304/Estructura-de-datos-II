@@ -286,7 +286,7 @@ public class ArbolM {
     }
     private boolean Existe(Nodo P,int x)
     {
-        if(P==null) return false;
+       /* if(P==null) return false;
         
         else
         {
@@ -296,11 +296,7 @@ public class ArbolM {
            }
            else
            {
-               if(esHoja(P))
-               {
-                  return false; 
-               }
-               else
+               if(!esHoja(P))
                {
                    for(int i=1;i<=P.M;i++)
                    {
@@ -309,14 +305,32 @@ public class ArbolM {
                            return true;
                        }
                    }
-                   
+                  
                }
+              
                return false;
            }
             
             
             
+        }*/
+        if(P==null) return false;
+        else
+        {
+            if(esHoja(P)) return P.BuscarElemento(x);
+            else
+            {
+                int k=this.getHijoDesc(P,x);
+                if(k==-1) return true;
+                else
+                {
+                    return Existe(P.getHijo(k),x);
+                }
+            }
+            
         }
+        
+        
     }
     public boolean Existe(int x)
     {
