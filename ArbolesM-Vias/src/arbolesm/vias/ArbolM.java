@@ -403,5 +403,31 @@ public class ArbolM {
     {
         return SumaNivel(this.raiz,x);
     }
+    public Nodo BuscarNodo(int x)
+    {
+        return BuscarNodo(this.raiz,x);
+    }
+    private Nodo BuscarNodo(Nodo P,int x)
+    {
+        if(P==null) return null;
+        else
+        { //Ahora tenemos que buscar el caso mas sencillo
+           int k;
+           k=this.getHijoDesc(P, x);//Buscamos el hijo descendiente
+           //Si devuelve -1 significa que el elemento ya se encuentra en el nodo
+           if(k==-1) 
+           {
+               return P;
+           }
+          else
+           {
+            return BuscarNodo(P.getHijo(k),x);           
+           }
+        }
+    
+    
+    }
+    
+    
     
 }

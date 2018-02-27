@@ -40,6 +40,7 @@ public class MainForm extends javax.swing.JFrame {
         Niveles = new javax.swing.JButton();
         SumaNiveles = new javax.swing.JButton();
         Clear = new javax.swing.JButton();
+        BuscarNodo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,6 +118,13 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
+        BuscarNodo.setText("BUSCAR NODO");
+        BuscarNodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarNodoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,9 +132,6 @@ public class MainForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(SumaNiveles, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(INORDEN, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -145,7 +150,12 @@ public class MainForm extends javax.swing.JFrame {
                                 .addComponent(Altura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(PostOrden, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
                             .addComponent(Niveles))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(SumaNiveles, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                            .addComponent(BuscarNodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,7 +182,9 @@ public class MainForm extends javax.swing.JFrame {
                 .addComponent(Niveles)
                 .addGap(18, 18, 18)
                 .addComponent(SumaNiveles)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(BuscarNodo)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         pack();
@@ -260,6 +272,25 @@ public class MainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ClearActionPerformed
 
+    private void BuscarNodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarNodoActionPerformed
+        // TODO add your handling code here:
+        Salida.setText(" ");
+        int dato=Integer.parseInt(JOptionPane.showInputDialog("Introduzca el elemento para buscar su nodo"));
+        Nodo N=arbol.BuscarNodo(dato);
+        if(N!=null)
+        {
+            for (int i = 1; i <= N.CantOcupados(); i++) 
+           {
+            Salida.append(String.valueOf(N.getElem(i))+ " ");
+            
+           }
+        }
+        else
+        {
+         JOptionPane.showMessageDialog(null,"EL ELEMENTO INGRESADO NO ESTA EN EL ARBOL, POR LO TANTO NO TIENE NODO");   
+        }
+    }//GEN-LAST:event_BuscarNodoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -298,6 +329,7 @@ public class MainForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Altura;
     private javax.swing.JButton Buscar;
+    private javax.swing.JButton BuscarNodo;
     private javax.swing.JButton Clear;
     private javax.swing.JButton INORDEN;
     private javax.swing.JButton Insertar;
