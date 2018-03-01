@@ -73,9 +73,9 @@ public class ArbolBinario {
         }
     }
     public void preOrden(JTextArea jta){
-        jta.append("preOrden: ");
+        
         preOrden(raiz,jta);
-        jta.append("\n");
+        
     }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
      private void inOrden(NodoBin p,JTextArea jta){
@@ -346,13 +346,136 @@ public class ArbolBinario {
 //   }
    
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////   
-public boolean Eslista()
+public boolean EsListaIzquierda()
 {
-    return Eslista(this.raiz);
+    return EsListaIzquierda(this.raiz);
 }
-private boolean Eslista(NodoBin P)
+private boolean EsListaIzquierda(NodoBin P)// :V Este es algún ejercicio del practico 1
 {
-    return false;
+    
+    boolean k=false;
+  if(P==null) return k;
+  else
+  {
+      if(esHoja(P))
+      {
+          k=true;
+          return k;
+          
+      }
+          
+      else
+      {
+          if(this.raiz==P)
+          {
+              if(P.getHI()==null) 
+              {
+                  k=false;
+                  return k;
+              }
+              else
+              {
+                  return EsListaIzquierda(P.getHI());
+              }
+              
+          }
+          else
+          {
+              if(P.getHD()!= null)//Significa que tienen un hijo izquierdo
+              {
+                  k=false;
+                  return k;
+              }
+              else
+              {
+                  if(P.getHI()!=null)
+                  {
+                       return EsListaIzquierda(P.getHI());
+                      
+                  }
+                  else
+                  {
+                      k=true;
+                      return k;
+                  }
+              }
+              
+              
+          }
+          
+              
+              
+      }
+              
+  }
+  
+    
+}
+public boolean EsListaDerecha()
+{
+    return EsListaDerecha(this.raiz);
+}
+
+private boolean EsListaDerecha(NodoBin P)
+{
+     
+    boolean k=false;
+  if(P==null) return k;
+  else
+  {
+      if(esHoja(P))
+      {
+          k=true;
+          return k;
+          
+      }
+          
+      else
+      {
+          if(this.raiz==P)
+          {
+              if(P.getHD()==null) 
+              {
+                  k=false;
+                  return k;
+              }
+              else
+              {
+                  return EsListaDerecha(P.getHD());
+              }
+              
+          }
+          else
+          {
+              if(P.getHI()!= null)//Significa que tienen un hijo derecho
+              {
+                  k=false;
+                  return k;
+              }
+              else
+              {
+                  if(P.getHD()!=null)
+                  {
+                       return EsListaDerecha(P.getHD());
+                      
+                  }
+                  else
+                  {
+                      k=true;
+                      return k;
+                  }
+              }
+              
+              
+          }
+          
+              
+              
+      }
+              
+  }
+  
+    
 }
 
 }//end class
