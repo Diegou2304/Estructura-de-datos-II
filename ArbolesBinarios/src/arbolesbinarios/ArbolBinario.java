@@ -477,5 +477,39 @@ private boolean EsListaDerecha(NodoBin P)
   
     
 }
-
+public void Podar()//Este método permite eliminar todas los elementos que se encuentran en el ultimo nivel 
+{
+    Podar(this.raiz);
+}
+private void Podar(NodoBin P)
+{
+    int altura=this.altura();
+    //Según yo tenemos que ir hasta nivel-1 asi el puntero esta en el padre y de ahi eliminamos el elemento
+    NodoBin AP;//Este nodo siempre va a apuntar al padre de algún nodo
+    if(P==null) return;
+    else
+    {
+        if(this.raiz==P && esHoja(P))//Si es igual a la raiz y además es hoja, entonces eliminamos
+        {
+            P=null;//Con esto nos aseguramos que toda la referencia de memoria se vuelva nula
+        }
+        else
+        {
+            if(altura==P.)
+            
+            
+            
+            
+            Podar(P.getHI());
+            
+            Podar(P.getHD());
+        }
+        
+        
+    }
+    
+    
+    
+    
+}
 }//end class
