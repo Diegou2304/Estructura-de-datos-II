@@ -5,6 +5,8 @@
  */
 package arbolesm.vias;
 import javax.swing.JOptionPane;
+import java.util.LinkedList;
+ import java.util.Queue;
 /**
  *
  * @author Diego U
@@ -41,6 +43,11 @@ public class MainForm extends javax.swing.JFrame {
         SumaNiveles = new javax.swing.JButton();
         Clear = new javax.swing.JButton();
         BuscarNodo = new javax.swing.JButton();
+        CantidadNodos = new javax.swing.JButton();
+        SumaNiveless = new javax.swing.JButton();
+        RecorridoNiveles = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        BoxEntry = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -125,6 +132,36 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
+        CantidadNodos.setText("CANTIDAD DE NODOS");
+        CantidadNodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CantidadNodosActionPerformed(evt);
+            }
+        });
+
+        SumaNiveless.setText("SUMA NIVELES");
+        SumaNiveless.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SumaNivelessActionPerformed(evt);
+            }
+        });
+
+        RecorridoNiveles.setText("RECORRIDO POR NIVELES");
+        RecorridoNiveles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RecorridoNivelesActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ejercicio 8", "Item 2", "Item 3", "Item 4" }));
+
+        BoxEntry.setText("Aceptar");
+        BoxEntry.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BoxEntryActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,25 +174,35 @@ public class MainForm extends javax.swing.JFrame {
                             .addComponent(INORDEN, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(PreOrden, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Insertar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(Clear)
-                        .addGap(257, 257, 257))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(Buscar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Suma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Altura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(PostOrden, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
-                            .addComponent(Niveles))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BoxEntry))
+                        .addGap(204, 204, 204))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(SumaNiveles, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                            .addComponent(BuscarNodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(Suma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Altura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PostOrden, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                            .addComponent(SumaNiveles, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BuscarNodo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(CantidadNodos)
+                                .addGap(37, 37, 37)
+                                .addComponent(Clear))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Niveles)
+                                    .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(RecorridoNiveles)
+                                    .addComponent(SumaNiveless))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,28 +210,37 @@ public class MainForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BoxEntry))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(Insertar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(PreOrden)
                         .addGap(18, 18, 18)
                         .addComponent(INORDEN))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PostOrden)
+                    .addComponent(CantidadNodos)
                     .addComponent(Clear))
-                .addGap(18, 18, 18)
-                .addComponent(PostOrden)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Altura)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Altura)
+                    .addComponent(Niveles)
+                    .addComponent(SumaNiveless))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Suma)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Buscar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Suma)
+                    .addComponent(Buscar)
+                    .addComponent(RecorridoNiveles))
                 .addGap(18, 18, 18)
-                .addComponent(Niveles)
-                .addGap(18, 18, 18)
-                .addComponent(SumaNiveles)
-                .addGap(18, 18, 18)
-                .addComponent(BuscarNodo)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SumaNiveles)
+                    .addComponent(BuscarNodo))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -270,6 +326,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void ClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearActionPerformed
         // TODO add your handling code here:
+        Salida.setText("");
     }//GEN-LAST:event_ClearActionPerformed
 
     private void BuscarNodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarNodoActionPerformed
@@ -290,6 +347,35 @@ public class MainForm extends javax.swing.JFrame {
          JOptionPane.showMessageDialog(null,"EL ELEMENTO INGRESADO NO ESTA EN EL ARBOL, POR LO TANTO NO TIENE NODO");   
         }
     }//GEN-LAST:event_BuscarNodoActionPerformed
+
+    private void CantidadNodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CantidadNodosActionPerformed
+        // TODO add your handling code here:
+        Salida.setText("");
+        Salida.setText(String.valueOf(arbol.CantidadNodos()));
+    }//GEN-LAST:event_CantidadNodosActionPerformed
+
+    private void SumaNivelessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SumaNivelessActionPerformed
+        // TODO add your handling code here:
+        Salida.setText("");
+        arbol.SumaNiveles(Salida);
+    }//GEN-LAST:event_SumaNivelessActionPerformed
+
+    private void RecorridoNivelesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecorridoNivelesActionPerformed
+        // TODO add your handling code here:
+        Queue<Integer> cola=new LinkedList();
+        cola=arbol.RecorridoNiveles();
+        while(cola.isEmpty()!=true)
+        {
+            Salida.append(String.valueOf(cola.poll())+ " ");
+        }
+        
+       
+    }//GEN-LAST:event_RecorridoNivelesActionPerformed
+
+    private void BoxEntryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoxEntryActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_BoxEntryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -328,17 +414,22 @@ public class MainForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Altura;
+    private javax.swing.JButton BoxEntry;
     private javax.swing.JButton Buscar;
     private javax.swing.JButton BuscarNodo;
+    private javax.swing.JButton CantidadNodos;
     private javax.swing.JButton Clear;
     private javax.swing.JButton INORDEN;
     private javax.swing.JButton Insertar;
     private javax.swing.JButton Niveles;
     private javax.swing.JButton PostOrden;
     private javax.swing.JButton PreOrden;
+    private javax.swing.JButton RecorridoNiveles;
     private javax.swing.JTextArea Salida;
     private javax.swing.JButton Suma;
     private javax.swing.JButton SumaNiveles;
+    private javax.swing.JButton SumaNiveless;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

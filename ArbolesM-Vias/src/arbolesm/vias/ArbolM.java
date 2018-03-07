@@ -6,6 +6,8 @@
 package arbolesm.vias;
 
 import javax.swing.JTextArea;
+import java.util.Queue; //Esto sirve para las colas
+import java.util.LinkedList;
 
 /**
  * :v :v :v :v :v :v :v :v :v :v :v :v :v :v :v :v :v
@@ -122,7 +124,7 @@ public class ArbolM {
             AP.setHijo(Q, i);//Como AP apunta a la raiz, entonces le inserta el hijo en su correspondiente rama
         }
     }
-
+    //raiz,izquierda,derecha
     private void PreOrden(Nodo P, JTextArea jta) {
         if (P == null) 
         {
@@ -427,6 +429,128 @@ public class ArbolM {
     
     
     }
+    private int CantidadNodos(Nodo P)
+    {
+        if(P==null) return 0;
+        else
+        {
+            if(esHoja(P))
+            {
+                return 1;
+            }
+            else
+            {
+                int cantidad=0;
+                //Usamos cantidad P.M para recorrer todos los hijos
+                for (int i = 1; i <= P.M; i++) 
+                {
+                    cantidad+=CantidadNodos(P.getHijo(i));
+                    
+                }
+                return cantidad+1;
+            }
+            
+        }
+        
+        
+        
+    }
+    public int CantidadNodos( )
+    {
+        return CantidadNodos(this.raiz);
+    }
+    private void SumaNiveles(Nodo P, JTextArea jta)//Incompleto
+    {
+        if(P==null) return ;
+        else
+        {
+            jta.append(String.valueOf(P.SumaE()));
+            jta.append("\n");    
+           
+          int suma=0;
+          Nodo AP;
+          //Con este for recorremos todos los hijos que tenga la raiz
+            for (int i = 1; i < P.M; i++) 
+            {
+                AP=P.getHijo(i);
+                suma+=AP.SumaE();
+                
+            }
+           
+            
+             
+            
+        }
+        
+    }
+    public void SumaNiveles(JTextArea jta)
+    {
+        SumaNiveles(this.raiz,jta);
+        
+    }
+    //Ejercicio 4.
+    //Este es el recorrido tradicional de arriba hacia abajo
+    private Queue RecorridoNiveles(Nodo P)
+    {
+        Queue<Integer> cola=new LinkedList();//Declaracion de la cola tipo nodo
+        if(P==null) return null;
+        else
+        {
+            if(P==this.raiz)
+            {
+                for (int i = 1; i <= P.CantOcupados(); i++) 
+                {
+                    cola.add(P.getElem(i));//Añadimos a la cola todos los elementos
+                    
+                }
+            }
+            if(esHoja(P) && P==this.raiz)//Verificamos que el nodo sea hoja
+            {
+                return cola;
+                
+            }
+            else
+            {
+                Nodo aux;
+                Queue<Integer> cola2=new LinkedList();
+                for (int i = 1; i <= P.M; i++) //Ahora si no es raiz significa que tiene hijos, entoncs lo que hacemoes e
+                {   
+                    aux=P.getHijo(i);
+                    if(aux!=null)
+                    {
+                        for (int j = 1; j <= aux.CantOcupados(); j++) 
+                        {
+                        cola.add(aux.getElem(j));
+                        
+                        }
+                    }
+                    
+                }
+                
+                for (int i = 1; i <= P.M; i++) 
+                {
+                    cola2=RecorridoNiveles(P.getHijo(i));
+                    if(cola2!=null)
+                    {
+                        while(cola2.isEmpty()!=true)
+                        {
+                        cola.add(cola2.poll());
+                        }
+                    }
+                }
+                return cola;
+            }
+            
+        }
+        
+        
+    }
+    public Queue RecorridoNiveles()
+    {
+        return RecorridoNiveles(this.raiz);
+    }
+  
+   
     
     
     
