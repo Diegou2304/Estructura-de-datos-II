@@ -490,9 +490,56 @@ public class ArbolM {
     }
     //Ejercicio 4.
     //Este es el recorrido tradicional de arriba hacia abajo
-    private Queue RecorridoNiveles(Nodo P)
+    private Queue RecorridoNivelesIzquierdaDerecha(Nodo P)
     {
         Queue<Integer> cola=new LinkedList();//Declaracion de la cola tipo nodo
+        if(P==null) return null;
+        else
+        {
+            for (int i = 1; i <= P.CantOcupados(); i++) 
+                {
+                    cola.add(P.getElem(i));//Añadimos a la cola todos los elementos
+                    
+                }
+          
+            if(esHoja(P))//Verificamos que el nodo sea hoja
+            {
+                return cola;
+                
+            }
+            else
+            {
+                Nodo aux;
+                Queue<Integer> cola2=new LinkedList();
+                for (int i = 1; i <= P.M; i++) //Ahora si no es raiz significa que tiene hijos, entoncs lo que hacemoes e
+                {   
+                    
+                    cola2=RecorridoNivelesIzquierdaDerecha(P.getHijo(i));
+                    if(cola2!=null)
+                    {
+                        while(cola2.isEmpty()!=true)
+                        {
+                            cola.add(cola2.poll());
+                            
+                        }
+                        
+                    }
+                    
+                }
+                return cola;
+            }
+            
+        }
+        
+        
+    }
+    public Queue RecorridoNivelesIzquierdaDerecha()
+    {
+        return RecorridoNivelesIzquierdaDerecha(this.raiz);
+    }
+    private Queue RecorridoNivelesArribaAbajo(Nodo P)
+    {
+         Queue<Integer> cola=new LinkedList();//Declaracion de la cola tipo nodo
         if(P==null) return null;
         else
         {
@@ -529,7 +576,7 @@ public class ArbolM {
                 
                 for (int i = 1; i <= P.M; i++) 
                 {
-                    cola2=RecorridoNiveles(P.getHijo(i));
+                    cola2=RecorridoNivelesArribaAbajo(P.getHijo(i));
                     if(cola2!=null)
                     {
                         while(cola2.isEmpty()!=true)
@@ -542,12 +589,10 @@ public class ArbolM {
             }
             
         }
-        
-        
     }
-    public Queue RecorridoNiveles()
+    public Queue RecorridoNivelesArribaAbajo()
     {
-        return RecorridoNiveles(this.raiz);
+        return RecorridoNivelesArribaAbajo(this.raiz);
     }
   
    
