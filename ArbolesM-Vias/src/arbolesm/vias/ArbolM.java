@@ -537,7 +537,7 @@ public class ArbolM {
     {
         return RecorridoNivelesIzquierdaDerecha(this.raiz);
     }
-    private Queue RecorridoNivelesArribaAbajo(Nodo P)
+    private Queue RecorridoNivelesArribaAbajo(Nodo P,JTextArea jta)
     {
          Queue<Integer> cola=new LinkedList();//Declaracion de la cola tipo nodo
         if(P==null) return null;
@@ -548,9 +548,11 @@ public class ArbolM {
                 for (int i = 1; i <= P.CantOcupados(); i++) 
                 {
                     cola.add(P.getElem(i));//Añadimos a la cola todos los elementos
-                    
+                    jta.append(cola.poll()+"  ");
                 }
+                 jta.append("\n");
             }
+           
             if(esHoja(P) && P==this.raiz)//Verificamos que el nodo sea hoja
             {
                 return cola;
@@ -568,31 +570,34 @@ public class ArbolM {
                         for (int j = 1; j <= aux.CantOcupados(); j++) 
                         {
                         cola.add(aux.getElem(j));
+                        jta.append(cola.poll()+" ");
                         
                         }
                     }
-                    
+                    jta.append(" ");
                 }
-                
+                jta.append("\n");
                 for (int i = 1; i <= P.M; i++) 
                 {
-                    cola2=RecorridoNivelesArribaAbajo(P.getHijo(i));
+                    cola2=RecorridoNivelesArribaAbajo(P.getHijo(i),jta);
                     if(cola2!=null)
                     {
                         while(cola2.isEmpty()!=true)
                         {
                         cola.add(cola2.poll());
+                        jta.append(cola.poll()+" ");
                         }
                     }
                 }
+                
                 return cola;
             }
             
         }
     }
-    public Queue RecorridoNivelesArribaAbajo()
+    public Queue RecorridoNivelesArribaAbajo(JTextArea jta)
     {
-        return RecorridoNivelesArribaAbajo(this.raiz);
+        return RecorridoNivelesArribaAbajo(this.raiz,jta);
     }
   
    

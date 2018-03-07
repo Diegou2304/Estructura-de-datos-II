@@ -362,23 +362,9 @@ public class MainForm extends javax.swing.JFrame {
 
     private void RecorridoNivelesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecorridoNivelesActionPerformed
         // TODO add your handling code here:
-        Queue<Integer> cola=new LinkedList();
-        cola=arbol.RecorridoNivelesArribaAbajo();
-        Salida.append("Recorrido de arriba hacia abajo:");
-        while(cola.isEmpty()!=true)
-        {
-            Salida.append(String.valueOf(cola.poll())+ " ");
-        }
-        Salida.append("\n");
-        cola.clear();
-        cola=arbol.RecorridoNivelesIzquierdaDerecha();
-        Salida.append("Recorrido de izquierda a derecha:");
-        while(cola.isEmpty()!=true)
-        {
-            Salida.append(String.valueOf(cola.poll())+" ");
-        }
-        Salida.append("\n");
         
+        arbol.RecorridoNivelesArribaAbajo(Salida);
+       
        
     }//GEN-LAST:event_RecorridoNivelesActionPerformed
 
