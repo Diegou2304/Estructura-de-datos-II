@@ -533,17 +533,26 @@ public class ArbolM {
         
         
     }
-    public Queue RecorridoNivelesIzquierdaDerecha()
+    public void RecorridoNivelesIzquierdaDerecha(JTextArea jta)
     {
-        return RecorridoNivelesIzquierdaDerecha(this.raiz);
+        Queue<Integer> cola=new LinkedList();
+        
+        cola=RecorridoNivelesIzquierdaDerecha(this.raiz);
+        while(cola.isEmpty()!=true)
+        {
+            jta.append(cola.poll()+" ");
+        }
+        jta.append("\n");
     }
     private Queue RecorridoNivelesArribaAbajo(Nodo P,JTextArea jta)
     {
+        //PRIMERO ESTE ALGORITMO ESTABA PENSADO PARA DEVOLVER UNA COLA ENTERA CON TODOS LOS ELEMENTOS EN ORDEN PARA SACAR LOS ELEMENTOS DE LA COLA
+        //Y MOSTRARLOS, AL CAMBIARLO HAY ALGUNAS COSAS QUE NO DEBERIAN ESTAR PERO ESO ES PROBLEMA PARA DESPUES
          Queue<Integer> cola=new LinkedList();//Declaracion de la cola tipo nodo
         if(P==null) return null;
         else
         {
-            if(P==this.raiz)
+            if(P==this.raiz)//Esto lo hacemos porque la raiz siempre la muestra
             {
                 for (int i = 1; i <= P.CantOcupados(); i++) 
                 {
@@ -553,33 +562,30 @@ public class ArbolM {
                  jta.append("\n");
             }
            
-            if(esHoja(P) && P==this.raiz)//Verificamos que el nodo sea hoja
-            {
-                return cola;
-                
-            }
-            else
-            {
+           
                 Nodo aux;
                 Queue<Integer> cola2=new LinkedList();
-                for (int i = 1; i <= P.M; i++) //Ahora si no es raiz significa que tiene hijos, entoncs lo que hacemoes e
-                {   
-                    aux=P.getHijo(i);
-                    if(aux!=null)
-                    {
-                        for (int j = 1; j <= aux.CantOcupados(); j++) 
+                if(!esHoja(P))
+                {
+                    for (int i = 1; i <= P.M; i++) //Ahora si no es raiz significa que tiene hijos, entoncs lo que hacemoes e
+                    {   
+                        aux=P.getHijo(i);
+                        if(aux!=null)//Para evitar errores
                         {
-                        cola.add(aux.getElem(j));
-                        jta.append(cola.poll()+" ");
-                        
+                            for (int j = 1; j <= aux.CantOcupados(); j++)//Insertamos todos los elementos de los hijos del nodo padre
+                            {
+                            cola.add(aux.getElem(j));
+                            jta.append(cola.poll()+" ");
+
+                            }
                         }
+                        jta.append(" ");
                     }
-                    jta.append(" ");
                 }
                 jta.append("\n");
                 for (int i = 1; i <= P.M; i++) 
                 {
-                    cola2=RecorridoNivelesArribaAbajo(P.getHijo(i),jta);
+                    cola2=RecorridoNivelesArribaAbajo(P.getHijo(i),jta);//aqui la cola se llena con
                     if(cola2!=null)
                     {
                         while(cola2.isEmpty()!=true)
@@ -591,16 +597,140 @@ public class ArbolM {
                 }
                 
                 return cola;
-            }
+            
             
         }
     }
-    public Queue RecorridoNivelesArribaAbajo(JTextArea jta)
+    public void RecorridoNivelesArribaAbajo(JTextArea jta)
     {
-        return RecorridoNivelesArribaAbajo(this.raiz,jta);
+         RecorridoNivelesArribaAbajo(this.raiz,jta);
     }
-  
+  //Ejercicio 4
+    //Verificar que dos arboles M vias sean iguales
+    //Esta Funcion principalmente lleva a todos los nodos a un analisis individual
+    private boolean ArbolesIguales(Nodo P1, Nodo P2)
+    {
+        
+        //Primero tenemos que verificar que las raices existan
+        if(P1==null && P2==null) return true;
+        if(P1==null && P2!=null || P1!=null && P2==null) return false;
+        
+        else if(P1.NodosIguales(P2))//Verificamos que los nodos sean iguales
+            {
+                for (int i = 1; i <= P1.M; i++) //Esto lo hacemos para ir a verificar a cada hijo
+                {
+                    if(!ArbolesIguales(P1.getHijo(i),P2.getHijo(i)))//Esto se encarga de comparar cada nodo hijo recursivamente asi que no nos preocupamos
+                    {
+                        return false;
+                        
+                    }
+                    
+                }
+                                
+            return true;
+            }
+        return false;
+        
+    }
+
+    
+    
+    public boolean ArbolesIguales(ArbolM arbol)
+    {
+        return ArbolesIguales(this.raiz,arbol.raiz);
+    }
    
+    
+    //Este es el ejercico numero 6
+    
+    private void ParesPorNivel(Nodo P, JTextArea jta)
+    {
+        if(P==null) return;
+        else
+        {
+            
+            
+        
+        
+        }
+           
+            
+            
+            
+            
+      
+                
+                
+           
+            
+     }
+        
+        
+        
+    
+    public void ParesPorNivel(JTextArea jta)
+    {
+        ParesPorNivel(this.raiz,jta);
+    }
+    //Este es el ejercicio 8
+    private int NivelElemento(Nodo P, int elemento)
+    {
+        
+        if (P==null) 
+        {
+            return -1;
+        }
+        
+            if(esHoja(P))
+            {
+                if(P.BuscarElemento(elemento)) return 1;
+                else
+                {
+                    return -1;
+                }
+            }
+            else
+            {
+                int k=this.getHijoDesc(P, elemento);
+                if(k==-1) return 1;
+                else
+                {
+                    int h=NivelElemento(P.getHijo(k),elemento);
+                    if(h==-1)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        return h+1;
+                    }
+                }
+            }
+        
+        
+        
+        
+    }
+    public int NivelElemento(int x)
+    {
+        return NivelElemento(this.raiz,x);
+    }
+    
+    
+    private void ElementoMayorNivel(Nodo P, int altura,JTextArea jta)
+    {
+        //Esto nos muestra solo en el caso que sea igual a la raiz
+        if(P==null) return;//No hace nada
+        
+        
+        
+    }
+    public void ElementoMayorNivel(JTextArea jta)
+    {
+        ElementoMayorNivel(this.raiz,this.Altura(),jta);
+        
+    }
+    
     
     
     
