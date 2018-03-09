@@ -544,28 +544,27 @@ public class ArbolM {
         }
         jta.append("\n");
     }
-    private Queue RecorridoNivelesArribaAbajo(Nodo P,JTextArea jta)
+    private void RecorridoNivelesArribaAbajo(Nodo P,JTextArea jta)
     {
-        //PRIMERO ESTE ALGORITMO ESTABA PENSADO PARA DEVOLVER UNA COLA ENTERA CON TODOS LOS ELEMENTOS EN ORDEN PARA SACAR LOS ELEMENTOS DE LA COLA
-        //Y MOSTRARLOS, AL CAMBIARLO HAY ALGUNAS COSAS QUE NO DEBERIAN ESTAR PERO ESO ES PROBLEMA PARA DESPUES
-         Queue<Integer> cola=new LinkedList();//Declaracion de la cola tipo nodo
-        if(P==null) return null;
+       
+         
+        if(P==null) return ;
         else
         {
             if(P==this.raiz)//Esto lo hacemos porque la raiz siempre la muestra
             {
                 for (int i = 1; i <= P.CantOcupados(); i++) 
                 {
-                    cola.add(P.getElem(i));//Añadimos a la cola todos los elementos
-                    jta.append(cola.poll()+"  ");
+                   
+                    jta.append(P.getElem(i)+"  ");
                 }
                  jta.append("\n");
             }
            
            
                 Nodo aux;
-                Queue<Integer> cola2=new LinkedList();
-                if(!esHoja(P))
+                
+                if(!esHoja(P))//Si no es hoja estonces me muestra todos los hijos y sus elementos
                 {
                     for (int i = 1; i <= P.M; i++) //Ahora si no es raiz significa que tiene hijos, entoncs lo que hacemoes e
                     {   
@@ -574,8 +573,8 @@ public class ArbolM {
                         {
                             for (int j = 1; j <= aux.CantOcupados(); j++)//Insertamos todos los elementos de los hijos del nodo padre
                             {
-                            cola.add(aux.getElem(j));
-                            jta.append(cola.poll()+" ");
+                            
+                            jta.append(aux.getElem(j)+" ");
 
                             }
                         }
@@ -585,18 +584,11 @@ public class ArbolM {
                 jta.append("\n");
                 for (int i = 1; i <= P.M; i++) 
                 {
-                    cola2=RecorridoNivelesArribaAbajo(P.getHijo(i),jta);//aqui la cola se llena con
-                    if(cola2!=null)
-                    {
-                        while(cola2.isEmpty()!=true)
-                        {
-                        cola.add(cola2.poll());
-                        jta.append(cola.poll()+" ");
-                        }
-                    }
+                    RecorridoNivelesArribaAbajo(P.getHijo(i),jta);//aqui la cola se llena con
+                    
                 }
                 
-                return cola;
+               
             
             
         }
