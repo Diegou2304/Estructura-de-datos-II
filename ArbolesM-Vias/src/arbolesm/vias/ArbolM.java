@@ -8,7 +8,7 @@ package arbolesm.vias;
 import javax.swing.JTextArea;
 import java.util.Queue; //Esto sirve para las colas
 import java.util.LinkedList;
-
+import java.util.Stack;
 /**
  * :v :v :v :v :v :v :v :v :v :v :v :v :v :v :v :v :v
  *
@@ -546,8 +546,6 @@ public class ArbolM {
     }
     private void RecorridoNivelesArribaAbajo(Nodo P,JTextArea jta)
     {
-       
-         
         if(P==null) return ;
         else
         {
@@ -562,8 +560,8 @@ public class ArbolM {
             }
            
            
-                Nodo aux;
-                
+                Nodo aux=null;
+
                 if(!esHoja(P))//Si no es hoja estonces me muestra todos los hijos y sus elementos
                 {
                     for (int i = 1; i <= P.M; i++) //Ahora si no es raiz significa que tiene hijos, entoncs lo que hacemoes e
@@ -577,11 +575,15 @@ public class ArbolM {
                             jta.append(aux.getElem(j)+" ");
 
                             }
+                        
                         }
                         jta.append(" ");
+                     
                     }
                 }
-                jta.append("\n");
+                if(aux!=null) jta.append("\n");
+                
+                
                 for (int i = 1; i <= P.M; i++) 
                 {
                     RecorridoNivelesArribaAbajo(P.getHijo(i),jta);//aqui la cola se llena con
@@ -591,11 +593,55 @@ public class ArbolM {
                
             
             
-        }
+}
+       
+        
     }
     public void RecorridoNivelesArribaAbajo(JTextArea jta)
     {
          RecorridoNivelesArribaAbajo(this.raiz,jta);
+    }
+    
+   
+    public void RecorridoNivelesArribaAbajoIterativo(JTextArea jta)
+    {
+         Queue<Nodo> colaA=new LinkedList();
+         Queue <Nodo> colaB=new LinkedList();
+         Nodo aux=null;
+         
+         colaA.add(raiz);
+         while(!colaA.isEmpty())
+         {
+             aux=colaA.poll();
+             for (int i = 1; i <= aux.CantOcupados(); i++) 
+             {
+                 jta.append(String.valueOf(aux.getElem(i))+" ");
+                 
+             }
+             
+             for (int i = 1; i <= aux.M; i++) 
+             {
+                 if(aux.getHijo(i)!=null)
+                 {
+                     colaB.add(aux.getHijo(i));
+                 }
+                 
+             }
+             if(colaA.isEmpty())
+             {
+                 colaA=colaB;
+                 colaB=new LinkedList();
+                 jta.append("\n");
+                 
+             }
+             
+         }
+         
+         
+         
+         
+
+        
     }
   //Ejercicio 4
     //Verificar que dos arboles M vias sean iguales
@@ -635,18 +681,41 @@ public class ArbolM {
     
     //Este es el ejercico numero 6
     
-    private void ParesPorNivel(Nodo P, JTextArea jta)
-    {
-        if(P==null) return;
-        else
-        {
-            
-            
-        
-        
-        }
+    public void ParesPorNivel( JTextArea jta)
+    {        
            
-            
+             Queue<Nodo> colaA=new LinkedList();
+         Queue <Nodo> colaB=new LinkedList();
+         Nodo aux=null;
+         
+         colaA.add(raiz);
+         while(!colaA.isEmpty())
+         {
+             aux=colaA.poll();
+             for (int i = 1; i <= aux.CantOcupados(); i++) 
+             {
+                 if(aux.getElem(i)%2==0)
+                 {
+             
+                 jta.append(String.valueOf(aux.getElem(i))+" ");
+                 }
+             }
+             
+             for (int i = 1; i <= aux.M; i++) 
+             {
+                 if(aux.getHijo(i)!=null)
+                 {
+                     colaB.add(aux.getHijo(i));
+                 }
+                 
+             }
+             if(colaA.isEmpty())
+             {
+                 colaA=colaB;
+                 colaB=new LinkedList();
+                 jta.append("\n");
+                 
+             }
             
             
             
@@ -657,13 +726,9 @@ public class ArbolM {
             
      }
         
-        
+    }
         
     
-    public void ParesPorNivel(JTextArea jta)
-    {
-        ParesPorNivel(this.raiz,jta);
-    }
     //Este es el ejercicio 8
     private int NivelElemento(Nodo P, int elemento)
     {
@@ -722,7 +787,158 @@ public class ArbolM {
         ElementoMayorNivel(this.raiz,this.Altura(),jta);
         
     }
+    public void RecorridoNivelAbajoArriba(JTextArea jta)
+    {
+         Stack<Integer> pilaResultante=new Stack();
+        Queue<Nodo> colaHijo=new LinkedList();
+        Queue<Nodo> colaPadre=new LinkedList();
+        Nodo aux=null;
+        colaPadre.add(raiz);
+        while(!colaPadre.isEmpty())
+        {
+            aux=colaPadre.poll();//Obtenemos un padre
+            for (int i = 1; i <= aux.CantOcupados(); i++) 
+            {
+                pilaResultante.add(aux.getElem(i));
+            }
+            //Ahora llenamos la cola de hijos
+            for (int i = 1; i <= aux.M; i++) 
+            {
+                if(aux.getHijo(i)!=null)
+                {
+                    colaHijo.add(aux.getHijo(i));
+                }
+            }
+            if(colaPadre.isEmpty())
+            {
+                pilaResultante.add(null);
+                colaPadre=colaHijo;
+                colaHijo=new LinkedList();
+                
+            }
+        }
+        
+        int j;
+        while (!pilaResultante.empty())
+        {
+            if(pilaResultante.peek()==null){
+                
+                pilaResultante.pop();
+                jta.append("\n");
+            }
+            else
+            {
+                jta.append(String.valueOf(pilaResultante.pop()+" "));
+            }
+            
+           
+          
+            
+        }
+        
+        
+        
+    }
     
+    public void  MayorElementoNivelIterativo(JTextArea jta)
+    {
+        int mayor=0;
+        Queue<Nodo> colaResultante=new LinkedList();
+          Queue<Nodo> colaSuperior=new LinkedList();
+          Queue<Nodo> colaInferior=new LinkedList();
+    Nodo P=null;
+    Nodo aux=null;
+    colaSuperior.add(raiz);
+    P=colaSuperior.peek();
+        
+    jta.append(String.valueOf(P.ElementoMayor())+" ");
+    jta.append("\n");
+            
+        
+    
+    //1.- empezar con una cola con la raiz.
+    //2.- buscar el mayor e imprimirlo 3.- tengo que llenar la cola inferior con los hijos de la raiz
+    while(!colaSuperior.isEmpty() || colaSuperior.peek()!=null)
+    {
+        P=colaSuperior.poll();
+        while(P!=null)
+        {
+            for (int i = 1; i <= P.M; i++) 
+            {
+                if(P.getHijo(i)!=null)
+                {
+                 colaInferior.add(P.getHijo(i));
+                colaResultante.add(P.getHijo(i));
+                }
+            
+            }
+            P=colaSuperior.poll();
+        }
+        colaSuperior=new LinkedList();
+        colaSuperior=colaResultante;
+        colaResultante=new LinkedList();
+        
+       
+        int MayorAnterior=0;
+        int resultante=0;
+        
+        Nodo aux2=null;
+        while(colaInferior.peek()!=null)
+        {
+            aux2=colaInferior.peek();
+            
+            
+            if(aux2!=null)//Estos dos fi iguales porque me da error de exepcion por un null
+            {
+                
+                MayorAnterior=colaInferior.poll().ElementoMayor();
+                aux2=colaInferior.peek();
+                if(aux2!=null)
+                {
+                   
+                    mayor=colaInferior.poll().ElementoMayor();
+                    if(MayorAnterior>mayor)
+                    {
+                        resultante=MayorAnterior;
+                    }
+                    else
+                    {
+                        resultante=mayor;
+                    }
+                }
+                else
+                {
+                    if(MayorAnterior>resultante)
+                    {
+                        resultante=MayorAnterior;
+                    }
+                    
+                }
+                
+            }
+            
+               if(colaInferior.peek()==null)
+               {
+                jta.append(String.valueOf(resultante));
+                jta.append("\n");
+               }
+                
+            
+            
+            
+            
+            
+            
+        }
+       
+    //   colaInferior=new LinkedList();
+            
+        
+     }
+    
+ }
+        
+        
     
     
     
