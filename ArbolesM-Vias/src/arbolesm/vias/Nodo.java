@@ -101,4 +101,37 @@ public class Nodo {
         }
         return suma;
     }
+    public boolean NodosIguales(Nodo P)
+    {
+        if(P.CantOcupados()==this.CantOcupados())
+        {
+            for (int i = 1; i <= P.CantOcupados(); i++) 
+            {
+                if(P.getElem(i)!=this.getElem(i))
+                {
+                    return false;
+                }
+                
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public int ElementoMayor()
+    {
+        int elem=this.getElem(1);
+        for (int i = 2; i <= this.CantOcupados(); i++) 
+        {
+            if(elem<this.getElem(i))
+            {
+                elem=this.getElem(i);
+            }
+            
+            
+        }
+        return elem;
+    }
 } //end class Nodo
