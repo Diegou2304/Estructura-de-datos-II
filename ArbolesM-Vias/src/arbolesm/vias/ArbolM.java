@@ -858,7 +858,7 @@ public class ArbolM {
     
     //1.- empezar con una cola con la raiz.
     //2.- buscar el mayor e imprimirlo 3.- tengo que llenar la cola inferior con los hijos de la raiz
-    while(!colaSuperior.isEmpty() || colaSuperior.peek()!=null)
+    while(!colaSuperior.isEmpty() )
     {
         P=colaSuperior.poll();
         while(P!=null)
@@ -879,7 +879,7 @@ public class ArbolM {
         colaResultante=new LinkedList();
         
        
-        int MayorAnterior=0;
+        int MayorAnterior;
         int resultante=0;
         
         Nodo aux2=null;
@@ -893,10 +893,13 @@ public class ArbolM {
                 
                 MayorAnterior=colaInferior.poll().ElementoMayor();
                 aux2=colaInferior.peek();
+                if(MayorAnterior<0) resultante=MayorAnterior-1;
                 if(aux2!=null)
                 {
+                    
                    
                     mayor=colaInferior.poll().ElementoMayor();
+                    if(mayor<0) resultante=mayor-1;
                     if(MayorAnterior>mayor)
                     {
                         resultante=MayorAnterior;
