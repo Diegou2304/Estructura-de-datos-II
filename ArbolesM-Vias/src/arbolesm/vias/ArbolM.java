@@ -544,6 +544,7 @@ public class ArbolM {
         }
         jta.append("\n");
     }
+    //Recursivo lo recorre el arbol como deberia, pero existe un problema con los saltos de linea
     private void RecorridoNivelesArribaAbajo(Nodo P,JTextArea jta)
     {
         if(P==null) return ;
@@ -556,7 +557,7 @@ public class ArbolM {
                    
                     jta.append(P.getElem(i)+"  ");
                 }
-                 jta.append("\n");
+                // jta.append("\n");
             }
            
            
@@ -581,7 +582,7 @@ public class ArbolM {
                      
                     }
                 }
-                if(aux!=null) jta.append("\n");
+              //  if(aux!=null) jta.append("\n");
                 
                 
                 for (int i = 1; i <= P.M; i++) 
@@ -939,9 +940,51 @@ public class ArbolM {
         
      }
     
+    
  }
         
-        
+     public void ParesApartirdeunNivel(JTextArea jta, int x) {
+        jta.setText("");
+        Queue<Nodo> ColaA = new LinkedList();
+        Queue<Nodo> ColaB = new LinkedList();
+        ParesApartirdeunNivel(this.raiz, x, ColaA);
+        jta.setText("");
+        Nodo P = null, q;
+        while (!ColaA.isEmpty()) {
+            P = ColaA.poll();
+            for (int i = 1; i <= P.CantOcupados(); i++) {
+                if (P.getElem(i) % 2 == 0) {
+                    jta.append(String.valueOf(P.getElem(i)) + " ");
+                }
+            }
+            for (int i = 1; i <= P.M; i++) {
+                q = P.getHijo(i);
+                if (q != null) {
+                    ColaB.add(q);
+                }
+            }
+
+            if (ColaA.isEmpty()) {
+                ColaA = ColaB;
+                ColaB = new LinkedList();
+                jta.append("\n");
+            }
+        }
+    }
+
+    private void ParesApartirdeunNivel(Nodo P, int x, Queue<Nodo> Cola) {
+        if (P == null) {
+            return;
+        }
+        if (x == 1) {
+            Cola.add(P);
+
+        } else {
+            for (int i = 1; i <= P.M; i++) {
+                ParesApartirdeunNivel(P.getHijo(i), x - 1, Cola);
+            }
+        }
+}   
     
     
     
