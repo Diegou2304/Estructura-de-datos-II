@@ -4,13 +4,13 @@
  * and open the template in the editor.
  */
 package arbolesbinarios;
-
-/**
- *
+import javax.swing.JOptionPane;
+/* *
  * @author Diego U
  */
 public class MainForm extends javax.swing.JFrame {
-
+    ArbolBinario arbolb=new ArbolBinario();
+    ArbolBinario arbolb1=new ArbolBinario();
     /**
      * Creates new form MainForm
      */
@@ -27,21 +27,166 @@ public class MainForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Salida = new javax.swing.JTextArea();
+        Insertar = new javax.swing.JButton();
+        PreOrden = new javax.swing.JButton();
+        Inorden = new javax.swing.JButton();
+        VerificarLista = new javax.swing.JButton();
+        Podar = new javax.swing.JButton();
+        Insertar2 = new javax.swing.JButton();
+        EsSubArbol = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        Salida.setColumns(20);
+        Salida.setRows(5);
+        jScrollPane1.setViewportView(Salida);
+
+        Insertar.setText("INSERTAR");
+        Insertar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InsertarActionPerformed(evt);
+            }
+        });
+
+        PreOrden.setText("PREORDEN");
+        PreOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PreOrdenActionPerformed(evt);
+            }
+        });
+
+        Inorden.setText("INORDEN");
+
+        VerificarLista.setText("VERIFICAR LISTA");
+        VerificarLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerificarListaActionPerformed(evt);
+            }
+        });
+
+        Podar.setText("PODAR");
+        Podar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PodarActionPerformed(evt);
+            }
+        });
+
+        Insertar2.setText("Insertar 2");
+        Insertar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Insertar2ActionPerformed(evt);
+            }
+        });
+
+        EsSubArbol.setText("EsSubArbol");
+        EsSubArbol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EsSubArbolActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(Inorden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Insertar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PreOrden, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(36, 36, 36)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Insertar2))
+                    .addComponent(VerificarLista)
+                    .addComponent(Podar)
+                    .addComponent(EsSubArbol))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(Insertar)
+                                .addGap(18, 18, 18)
+                                .addComponent(PreOrden)))
+                        .addGap(18, 18, 18)
+                        .addComponent(Inorden))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(Insertar2)))
+                .addGap(18, 18, 18)
+                .addComponent(VerificarLista)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Podar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(EsSubArbol)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void InsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertarActionPerformed
+        // TODO add your handling code here:
+       int dato=Integer.parseInt(JOptionPane.showInputDialog("Introduzca elemento a insertar"));
+       arbolb.insertar(dato);
+    }//GEN-LAST:event_InsertarActionPerformed
+
+    private void PreOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PreOrdenActionPerformed
+        // TODO add your handling code here:
+        Salida.setText(" ");
+        arbolb.preOrden(Salida);
+    }//GEN-LAST:event_PreOrdenActionPerformed
+
+    private void VerificarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerificarListaActionPerformed
+        // TODO add your handling code here:
+        if(arbolb.EsListaIzquierda()==false)
+        {
+            JOptionPane.showMessageDialog(null,"No es una lista a la izquierda");
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Si es lista a la izquierda");
+        }
+         if(arbolb.EsListaDerecha()==false)
+        {
+            JOptionPane.showMessageDialog(null,"No es una lista a la derecha");
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"Si es lista a la derecha");
+        }
+    }//GEN-LAST:event_VerificarListaActionPerformed
+
+    private void PodarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PodarActionPerformed
+        // TODO add your handling code here:
+        arbolb.Podar();
+    }//GEN-LAST:event_PodarActionPerformed
+
+    private void Insertar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Insertar2ActionPerformed
+        // TODO add your handling code here:
+        int dato=Integer.parseInt(JOptionPane.showInputDialog("Introduzca elemento a insertar"));
+       arbolb1.insertar(dato);
+        
+    }//GEN-LAST:event_Insertar2ActionPerformed
+
+    private void EsSubArbolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EsSubArbolActionPerformed
+        // TODO add your handling code here:
+        arbolb.EsSubArbol(arbolb);
+    }//GEN-LAST:event_EsSubArbolActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +224,14 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton EsSubArbol;
+    private javax.swing.JButton Inorden;
+    private javax.swing.JButton Insertar;
+    private javax.swing.JButton Insertar2;
+    private javax.swing.JButton Podar;
+    private javax.swing.JButton PreOrden;
+    private javax.swing.JTextArea Salida;
+    private javax.swing.JButton VerificarLista;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

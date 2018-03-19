@@ -14,13 +14,31 @@ public class NodoBin {
     private NodoBin hijoIzq;
     private int elemento;
     private NodoBin hijoDer;
-    
+    private int factorEquilibrio;
     public NodoBin(int e) {
         hijoIzq=null;
         elemento = e;
         hijoDer=null;
+        factorEquilibrio=0;
     }
     
+    public void setFE(int i)
+    {
+        factorEquilibrio=i;
+        
+    }
+    public int getFE()
+    {
+        return factorEquilibrio;
+    }
+    public void EliminarHI()
+    {
+        hijoIzq=null;
+    }
+    public void EliminarHD()
+    {
+        hijoDer=null;
+    }
     public void setHI(NodoBin izq){
         hijoIzq = izq;
     }

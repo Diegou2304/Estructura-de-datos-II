@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package arbolesbinarios;
-
+import javax.swing.JOptionPane;
 /**
  *
  * @author Diego U
@@ -64,6 +64,45 @@ public class ArbolBinario {
             ap.setHD(q);
         } 
     }
+    /////////////////////////////////////////////////////////////////
+    public void InsertarBalanceado(int elem)
+    {
+        int i=0;
+        NodoBin x=new NodoBin(elem);
+        if(raiz==null) 
+        {
+            raiz=x; return;
+        }
+        else
+        {
+            NodoBin p=raiz;
+            NodoBin ap=null;
+            while(p!=null){ 
+            ap=p;
+            if(elem<p.getElem()){
+                p=p.getHI();
+                i++;//Esto simboliza a nuestro FE
+            }
+            else{
+                if(elem>p.getElem()){
+                    p=p.getHD();
+                }
+                else{
+                    return;
+                }
+            }  
+        }
+
+
+        }
+
+    }
+        
+    
+    
+    
+    
+    
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private void preOrden(NodoBin p,JTextArea jta){
         if(p!=null){
@@ -479,31 +518,38 @@ private boolean EsListaDerecha(NodoBin P)
 }
 public void Podar()//Este método permite eliminar todas los elementos que se encuentran en el ultimo nivel 
 {
-    Podar(this.raiz);
+    Podar(this.raiz,this.altura());
 }
-private void Podar(NodoBin P)
+private void Podar(NodoBin P,int altura)
 {
-    int altura=this.altura();
+   
     //Según yo tenemos que ir hasta nivel-1 asi el puntero esta en el padre y de ahi eliminamos el elemento
-    NodoBin AP;//Este nodo siempre va a apuntar al padre de algún nodo
+  
+    
+    
+    NodoBin AP;
     if(P==null) return;
     else
     {
-        if(this.raiz==P && esHoja(P))//Si es igual a la raiz y además es hoja, entonces eliminamos
+        if(altura==1)
         {
-            P=null;//Con esto nos aseguramos que toda la referencia de memoria se vuelva nula
+            if(P!=raiz)
+            {
+                AP=this.devolverPadre(P.getElem());
+                AP.EliminarHD();
+                AP.EliminarHI();
+            }
+            if(P==raiz)
+            {
+                raiz=null;
+            }
         }
         else
         {
-            if(altura==P.)
-            
-            
-            
-            
-            Podar(P.getHI());
-            
-            Podar(P.getHD());
+            Podar(P.getHD(),altura-1);
+            Podar(P.getHI(),altura-1);
         }
+        
         
         
     }
@@ -511,5 +557,34 @@ private void Podar(NodoBin P)
     
     
     
+}
+public void EsSubArbol(ArbolBinario dos) {
+        NodoBin P = buscar(getRaiz(), dos.getRaiz().getElem());
+        JOptionPane.showMessageDialog(null, EsSubArbol(P, dos.raiz));
+
+    }
+
+    private boolean EsSubArbol(NodoBin A, NodoBin B) {
+
+       if (B == null && A != null) {
+            return true;
+        }
+        if (A == null && B != null) {
+            return false;
+        }
+        if (A == null && B == null) {
+            return true;
+        } else {
+            if (A.getElem() == B.getElem()) {
+                boolean k = EsSubArbol(A.getHD(), B.getHD());
+                boolean j = EsSubArbol(A.getHI(), B.getHI());
+                if (k == j && k == true) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
 }
 }//end class
