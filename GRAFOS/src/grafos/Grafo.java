@@ -26,9 +26,7 @@ public class Grafo {
                 M[i][j] = 0;
             }
         }
-        n
-                = -
-1;
+        n= -1;
         marca = new boolean[max + 1];
     }
 
@@ -87,6 +85,18 @@ public class Grafo {
     private boolean esMarcado(int u) {   //Devuelve true, si el vertice u está marcado.
         return marca[u];
     }
+    private int cantidadMarcados()
+    {
+        int acumulador=0;
+        for (int i = 0; i <= this.cantVertices(); i++) 
+        {
+            if(marca[i]!=false)
+            {
+                acumulador++;
+            }
+        }
+        return acumulador;
+    }
 
     public int getArco(int i, int j) {
         return M[i][j];
@@ -137,4 +147,80 @@ public class Grafo {
             }
         } while (!C.isEmpty());
     }
+    
+    public int CantidadArco(int u)
+    {
+        int acumulador=0;
+        
+        for (int i = 0; i <= this.cantVertices(); i++) 
+        {
+            if(M[u][i]>0)
+            {
+                acumulador++;
+            }
+            
+        }
+        return acumulador;
+        
+    }
+    public void MostrarAdyacentes(int u, JTextArea jta)
+    {
+        jta.append("Vertices adyacentes de: " + String.valueOf(u));
+        jta.append("\n");
+        for (int i = 0; i < this.cantVertices(); i++) 
+        {
+            if(M[u][i]>0)
+            {
+                jta.append(String.valueOf(i)+" ");
+            }
+            
+        }
+        
+        
+    }
+   
+    public boolean esConexo()
+    {
+        int suma=0;
+        
+        for (int i = 0; i < this.cantVertices(); i++) 
+        {
+            for (int j = 0; j < this.cantVertices(); j++) 
+            {
+                if(i!=j && M[i][j]==1)
+                {
+                   suma+=1;
+                }       
+                
+            }
+        }
+        return suma>=(this.cantVertices()-1)*2;
+        
+    }
+     public boolean esConexoRecursivo() {  //Recorrido en profundidad.
+        if (!esVerticeValido(0)) {
+            return false;  //Validación. v no existe en el Grafo.
+        }
+        desmarcarTodos();
+        
+        return esConexoRecursivo(0)==this.cantVertices();
+    }
+
+    private int esConexoRecursivo(int v)//Basicamente recorremos el arbol en profundidad y solo verificamos que se halla recorrido todos los vertices 
+    {  //mask function 
+        int acum=0;
+        marcar(v);//Marcamos el primero
+        for (int i = 0; i <= n; i++) {   //for (cada w adyacente a v)
+            if (M[v][i] ==1) {
+                int w = i;
+                if (!esMarcado(w))//Verificamos para no volverlo a contar 
+                {
+                    acum+=esConexoRecursivo(w);
+                }
+            }
+        }
+        return acum+1;
+    }
+    
+    
 } //end class

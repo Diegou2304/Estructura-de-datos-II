@@ -5,11 +5,14 @@
  */
 package grafos;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Diego U
  */
 public class Main extends javax.swing.JFrame {
+    Grafo grafo=new Grafo();
 
     /**
      * Creates new form Main
@@ -27,21 +30,252 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Matriz = new javax.swing.JTable();
+        InsertarArco = new javax.swing.JButton();
+        RecorridoBFS = new javax.swing.JButton();
+        CrearVertice = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Salida = new javax.swing.JTextArea();
+        RecorridoDFS = new javax.swing.JButton();
+        MuestreoMatriz = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        CantidadArco = new javax.swing.JButton();
+        Vertices = new javax.swing.JTextField();
+        MverticesAdyacentes = new javax.swing.JButton();
+        BesConexo = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        Matriz.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
+            }
+        ));
+        jScrollPane1.setViewportView(Matriz);
+
+        InsertarArco.setText("INSERTAR ARCO");
+        InsertarArco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InsertarArcoActionPerformed(evt);
+            }
+        });
+
+        RecorridoBFS.setText("BFS");
+        RecorridoBFS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RecorridoBFSActionPerformed(evt);
+            }
+        });
+
+        CrearVertice.setText("CREAR VERTICE");
+        CrearVertice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CrearVerticeActionPerformed(evt);
+            }
+        });
+
+        Salida.setColumns(20);
+        Salida.setRows(5);
+        jScrollPane2.setViewportView(Salida);
+
+        RecorridoDFS.setText("DFS");
+        RecorridoDFS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RecorridoDFSActionPerformed(evt);
+            }
+        });
+
+        MuestreoMatriz.setText("MOSTRAR MATRIZ DE ADYACENCIA");
+        MuestreoMatriz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MuestreoMatrizActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("CANTIDAD DE VERTICES");
+
+        CantidadArco.setText("CANTIDAD DE ARCOS");
+        CantidadArco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CantidadArcoActionPerformed(evt);
+            }
+        });
+
+        MverticesAdyacentes.setText("MOSTRAR VERTICESS ADAYACENTES");
+        MverticesAdyacentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MverticesAdyacentesActionPerformed(evt);
+            }
+        });
+
+        BesConexo.setText("ES CONEXO");
+        BesConexo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BesConexoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(Vertices, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))))
+                .addGap(73, 73, 73)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(InsertarArco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(RecorridoBFS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(RecorridoDFS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CrearVertice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(MuestreoMatriz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CantidadArco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(MverticesAdyacentes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BesConexo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Vertices, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(MuestreoMatriz)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(InsertarArco)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(RecorridoBFS)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(RecorridoDFS)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(CrearVertice)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(CantidadArco)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(MverticesAdyacentes)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BesConexo)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void InsertarArcoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertarArcoActionPerformed
+        // TODO add your handling code here:
+        
+        int dato1=Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el numero 1 (Fila x)"));
+        int dato2=Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese el numero 2 (Columna y)"));
+        grafo.insertarArco(dato1, dato2);
+        
+        
+    }//GEN-LAST:event_InsertarArcoActionPerformed
+
+    private void CrearVerticeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearVerticeActionPerformed
+        // TODO add your handling code here:
+        
+        grafo.crearVertice();//Nos crea un vertice en orden numerico
+        Vertices.setText(String.valueOf(grafo.cantVertices()));
+    }//GEN-LAST:event_CrearVerticeActionPerformed
+
+    private void RecorridoBFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecorridoBFSActionPerformed
+        // TODO add your handling code here:
+        Salida.setText(" ");
+        int dato=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero donde se va a iniciar el recorrido"));
+        grafo.BFS(dato,Salida);
+    }//GEN-LAST:event_RecorridoBFSActionPerformed
+
+    private void RecorridoDFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecorridoDFSActionPerformed
+        // TODO add your handling code here:
+         Salida.setText(" ");
+        int dato=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero donde se va a iniciar el recorrido"));
+        grafo.DFS(dato,Salida);
+    }//GEN-LAST:event_RecorridoDFSActionPerformed
+
+    private void MuestreoMatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MuestreoMatrizActionPerformed
+        // TODO add your handling code here:
+        Matriz.clearSelection();
+        for (int i = 0; i < grafo.cantVertices(); i++) {
+            for (int j = 0; j < grafo.cantVertices(); j++) {
+                Matriz.setValueAt(grafo.getArco(i, j), i, j);
+                
+            }
+        }
+        
+        
+    }//GEN-LAST:event_MuestreoMatrizActionPerformed
+
+    private void CantidadArcoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CantidadArcoActionPerformed
+        // TODO add your handling code here:
+        Salida.setText(" ");
+        int dato=Integer.parseInt(JOptionPane.showInputDialog("Introduzca el vertice para calcular sus arcos:"));
+        Salida.append("Cantidad de arcos de:"+ String.valueOf(dato));
+        Salida.append("\n");
+        Salida.append(String.valueOf(grafo.CantidadArco(dato)));
+        
+    }//GEN-LAST:event_CantidadArcoActionPerformed
+
+    private void MverticesAdyacentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MverticesAdyacentesActionPerformed
+        // TODO add your handling code here:
+        Salida.setText(" ");
+        int dato=Integer.parseInt(JOptionPane.showInputDialog("Introduzca el vertice para mostrar sus vertices adyacentes:"));
+         grafo.MostrarAdyacentes(dato,Salida);
+    }//GEN-LAST:event_MverticesAdyacentesActionPerformed
+
+    private void BesConexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BesConexoActionPerformed
+        // TODO add your handling code here:
+        Salida.setText(" ");
+        if(grafo.esConexo()) 
+        {
+            Salida.append("Iterativo:Es conexo\n");
+        }
+        else
+        {
+            Salida.append("Iterativo:No es conexo\n");
+        }
+        if(grafo.esConexoRecursivo()) 
+            
+        { 
+            Salida.append("Recursivo:Es conexo\n");
+        }
+        else
+        {
+            Salida.append("Recursivo:No es conexo\n");
+        }
+        
+        
+    }//GEN-LAST:event_BesConexoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +313,19 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BesConexo;
+    private javax.swing.JButton CantidadArco;
+    private javax.swing.JButton CrearVertice;
+    private javax.swing.JButton InsertarArco;
+    private javax.swing.JTable Matriz;
+    private javax.swing.JButton MuestreoMatriz;
+    private javax.swing.JButton MverticesAdyacentes;
+    private javax.swing.JButton RecorridoBFS;
+    private javax.swing.JButton RecorridoDFS;
+    private javax.swing.JTextArea Salida;
+    private javax.swing.JTextField Vertices;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
