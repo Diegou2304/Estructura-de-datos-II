@@ -55,6 +55,7 @@ public class MainForm extends javax.swing.JFrame {
         RecorridoAbajoArriba = new javax.swing.JButton();
         MayorNivel = new javax.swing.JButton();
         ParesDesdeNivel = new javax.swing.JButton();
+        RecorridoNiveles2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -216,11 +217,18 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
+        RecorridoNiveles2.setText("Recorrido Niveles Arriba Abajo recursivo");
+        RecorridoNiveles2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RecorridoNiveles2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
@@ -259,6 +267,7 @@ public class MainForm extends javax.swing.JFrame {
                                 .addComponent(SumaNiveless)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(RecorridoNiveles2)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(RecorridoNiveles1)
                         .addComponent(ArbolesIguales, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -326,7 +335,9 @@ public class MainForm extends javax.swing.JFrame {
                         .addComponent(MayorNivel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(ParesDesdeNivel)))
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(RecorridoNiveles2)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
@@ -514,6 +525,12 @@ public class MainForm extends javax.swing.JFrame {
         arbol.ParesApartirdeunNivel(Salida, dato);
     }//GEN-LAST:event_ParesDesdeNivelActionPerformed
 
+    private void RecorridoNiveles2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecorridoNiveles2ActionPerformed
+        // TODO add your handling code here:
+        Salida.setText(" ");
+        arbol.RecorridoNivelesArribaAbajo(Salida);
+    }//GEN-LAST:event_RecorridoNiveles2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -568,6 +585,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JButton RecorridoAbajoArriba;
     private javax.swing.JButton RecorridoNiveles;
     private javax.swing.JButton RecorridoNiveles1;
+    private javax.swing.JButton RecorridoNiveles2;
     private javax.swing.JTextArea Salida;
     private javax.swing.JButton Suma;
     private javax.swing.JButton SumaNiveles;

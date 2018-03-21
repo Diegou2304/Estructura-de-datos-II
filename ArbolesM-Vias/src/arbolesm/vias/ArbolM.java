@@ -559,6 +559,7 @@ public class ArbolM {
                 }
                 // jta.append("\n");
             }
+            
            
            
                 Nodo aux=null;
@@ -581,15 +582,16 @@ public class ArbolM {
                         jta.append(" ");
                      
                     }
-                }
-              //  if(aux!=null) jta.append("\n");
-                
-                
-                for (int i = 1; i <= P.M; i++) 
+                     for (int i = 1; i <= P.M; i++) 
                 {
                     RecorridoNivelesArribaAbajo(P.getHijo(i),jta);//aqui la cola se llena con
                     
                 }
+                }
+              //  if(aux!=null) jta.append("\n");
+                
+                
+              
                 
                
             
@@ -944,7 +946,7 @@ public class ArbolM {
  }
         
      public void ParesApartirdeunNivel(JTextArea jta, int x) {
-        jta.setText("");
+       /* jta.setText("");
         Queue<Nodo> ColaA = new LinkedList();
         Queue<Nodo> ColaB = new LinkedList();
         ParesApartirdeunNivel(this.raiz, x, ColaA);
@@ -969,7 +971,7 @@ public class ArbolM {
                 ColaB = new LinkedList();
                 jta.append("\n");
             }
-        }
+        }*/
     }
 
     private void ParesApartirdeunNivel(Nodo P, int x, Queue<Nodo> Cola) {
