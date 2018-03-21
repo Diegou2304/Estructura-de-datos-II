@@ -951,7 +951,7 @@ public class ArbolM {
  }
         
      public void ParesApartirdeunNivel(JTextArea jta, int x) {
-       /* jta.setText("");
+        jta.setText("");
         Queue<Nodo> ColaA = new LinkedList();
         Queue<Nodo> ColaB = new LinkedList();
         ParesApartirdeunNivel(this.raiz, x, ColaA);
@@ -976,7 +976,7 @@ public class ArbolM {
                 ColaB = new LinkedList();
                 jta.append("\n");
             }
-        }*/
+        }
     }
 
     private void ParesApartirdeunNivel(Nodo P, int x, Queue<Nodo> Cola) {
