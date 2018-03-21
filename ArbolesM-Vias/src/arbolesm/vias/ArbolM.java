@@ -459,34 +459,39 @@ public class ArbolM {
     {
         return CantidadNodos(this.raiz);
     }
-    private void SumaNiveles(Nodo P, JTextArea jta)//Incompleto
-    {
-        if(P==null) return ;
-        else
-        {
-            jta.append(String.valueOf(P.SumaE()));
-            jta.append("\n");    
-           
-          int suma=0;
-          Nodo AP;
-          //Con este for recorremos todos los hijos que tenga la raiz
-            for (int i = 1; i < P.M; i++) 
-            {
-                AP=P.getHijo(i);
-                suma+=AP.SumaE();
-                
-            }
-           
-            
-             
-            
-        }
-        
-    }
+   
     public void SumaNiveles(JTextArea jta)
     {
-        SumaNiveles(this.raiz,jta);
-        
+        Queue<Nodo> colap=new LinkedList();
+        Queue<Nodo> colah=new LinkedList();
+        colap.add(raiz);
+        Nodo aux=null;
+        int s=0;
+        while(!colap.isEmpty())
+        {
+            aux=colap.poll();
+            s+=aux.SumaE();
+            for (int i = 1; i <= aux.M; i++) 
+            {
+                if(aux.getHijo(i)!=null)
+                {
+                    colah.add(aux.getHijo(i));
+                }
+            }
+            
+            
+            if(colap.isEmpty())
+            {
+                jta.append(String.valueOf(s)+"\n");
+                s=0;
+                colap=colah;
+                colah=new LinkedList();
+                
+            }
+            
+            
+            
+        }
     }
     //Ejercicio 4.
     //Este es el recorrido tradicional de arriba hacia abajo

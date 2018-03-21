@@ -147,7 +147,7 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
-        SumaNiveless.setText("SUMA NIVELES");
+        SumaNiveless.setText("SUMA TODOS LOS NIVELES");
         SumaNiveless.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SumaNivelessActionPerformed(evt);
