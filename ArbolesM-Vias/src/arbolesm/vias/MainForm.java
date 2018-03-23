@@ -516,7 +516,7 @@ public class MainForm extends javax.swing.JFrame {
     private void MayorNivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MayorNivelActionPerformed
         // TODO add your handling code here:
         Salida.setText("");
-        arbol.MayorElementoNivelIterativo(Salida);
+        arbol.MayorElementoporNivel(Salida);
     }//GEN-LAST:event_MayorNivelActionPerformed
 
     private void ParesDesdeNivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ParesDesdeNivelActionPerformed

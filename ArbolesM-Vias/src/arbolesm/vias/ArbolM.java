@@ -949,7 +949,62 @@ public class ArbolM {
     
     
  }
-        
+        public void MayorElementoporNivel(JTextArea jta)
+        {
+            Queue <Nodo> colap=new LinkedList();
+            Queue <Nodo> colah=new LinkedList();
+            Nodo aux=null;
+            int mayor;
+            colap.add(raiz);
+            int auxiliar;
+            int mayoranterior=colap.peek().ElementoMayor();
+            
+            
+            
+            while(!colap.isEmpty())
+            {
+               
+                aux=colap.poll();
+                mayor=aux.ElementoMayor();
+                if(mayor<mayoranterior)
+                { 
+                    
+                    mayor=mayoranterior;
+                    
+                }
+                mayoranterior=mayor;
+                
+                
+                
+                
+                for (int i = 1; i <= aux.M; i++) 
+                {
+                    if(aux.getHijo(i)!=null)
+                    {
+                       colah.add(aux.getHijo(i));
+                    }
+                    
+                }
+                if(colap.isEmpty())
+                {
+                    jta.append(String.valueOf(mayor));
+                    jta.append("\n");
+                    colap=colah;
+                    colah= new LinkedList();
+                    if(colap.peek()!=null)
+                    {
+                    mayoranterior=colap.peek().ElementoMayor();
+                    }
+                    
+                }
+                
+                
+            }
+                   
+            
+            
+            
+        }
      public void ParesApartirdeunNivel(JTextArea jta, int x) {
         jta.setText("");
         Queue<Nodo> ColaA = new LinkedList();
