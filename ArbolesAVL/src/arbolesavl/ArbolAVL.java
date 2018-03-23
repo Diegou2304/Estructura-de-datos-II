@@ -25,7 +25,7 @@ public class ArbolAVL
     {
         return raiz;
     }
-    
+    //Como es recursiva revisa que cada nodo despues de insertar este balanceado sino lo balancea y devuelve un mismo nodo
     private NodoBinAVL InsertarBalanceado(int d, NodoBinAVL P)
     {
         //Lo insertamos normalmente
@@ -38,7 +38,8 @@ public class ArbolAVL
         }
         else if(P.getElem()<d)
         {
-            //Le mando insertar balanceado porque asi nos aseguramos que el nodo al insertar este balanceado
+            //Le mando insertar balanceado porque asi en caso que este desbalanceado devuelva un nuevo nodo con las operaciones respectivas
+            //para seguir balanceando
            P.setHD(InsertarBalanceado(d,P.getHD()));
         }
         int balanceo=this.FactorBalance(P);
