@@ -227,10 +227,15 @@ public class Grafo {
     }
     public int CantidadIslas()
     {
+        int x;
         this.desmarcarTodos();
+        if(CantidadIslas(0)==0) return 1;
+        else
+        {
        return CantidadIslas(0);//Empezamos de 0 porque no importa donde empecemos
-        
+        }
     }
+    //Tenemos que tener en cuenta que cuando se crea el vertice nace una isla ya depende si esta esta con arco o no
     private int CantidadIslas(int v)
     {
         if(!this.esVerticeValido(v))
