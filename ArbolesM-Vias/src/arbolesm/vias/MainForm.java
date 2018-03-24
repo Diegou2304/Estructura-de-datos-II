@@ -56,6 +56,7 @@ public class MainForm extends javax.swing.JFrame {
         MayorNivel = new javax.swing.JButton();
         ParesDesdeNivel = new javax.swing.JButton();
         RecorridoNiveles2 = new javax.swing.JButton();
+        PrimosNivel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -224,6 +225,13 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
+        PrimosNivel.setText("PRIMOS POR NIVEL");
+        PrimosNivel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PrimosNivelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -264,7 +272,9 @@ public class MainForm extends javax.swing.JFrame {
                                     .addComponent(Niveles)
                                     .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addComponent(SumaNiveless)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(SumaNiveless)
+                                    .addComponent(PrimosNivel))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(RecorridoNiveles2)
@@ -315,7 +325,9 @@ public class MainForm extends javax.swing.JFrame {
                                     .addComponent(Niveles)
                                     .addComponent(SumaNiveless))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Buscar)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Buscar)
+                                    .addComponent(PrimosNivel))
                                 .addGap(18, 18, 18)
                                 .addComponent(BuscarNodo))
                             .addGroup(layout.createSequentialGroup()
@@ -531,6 +543,12 @@ public class MainForm extends javax.swing.JFrame {
         arbol.RecorridoNivelesArribaAbajo(Salida);
     }//GEN-LAST:event_RecorridoNiveles2ActionPerformed
 
+    private void PrimosNivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrimosNivelActionPerformed
+        // TODO add your handling code here:
+        Salida.setText(" ");
+        arbol.PrimosxNivel(Salida);
+    }//GEN-LAST:event_PrimosNivelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -582,6 +600,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JButton ParesDesdeNivel;
     private javax.swing.JButton PostOrden;
     private javax.swing.JButton PreOrden;
+    private javax.swing.JButton PrimosNivel;
     private javax.swing.JButton RecorridoAbajoArriba;
     private javax.swing.JButton RecorridoNiveles;
     private javax.swing.JButton RecorridoNiveles1;

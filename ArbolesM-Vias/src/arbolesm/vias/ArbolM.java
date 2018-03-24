@@ -949,7 +949,7 @@ public class ArbolM {
     
     
  }
-        public void MayorElementoporNivel(JTextArea jta)
+    public void MayorElementoporNivel(JTextArea jta)
         {
             Queue <Nodo> colap=new LinkedList();
             Queue <Nodo> colah=new LinkedList();
@@ -1046,7 +1046,64 @@ public class ArbolM {
                 ParesApartirdeunNivel(P.getHijo(i), x - 1, Cola);
             }
         }
-}   
+}
+    private boolean esPrimo(int t)
+    {
+        if(t==0) return false;
+        for (int i = 2; i <= t-1; i++) {
+            if(t%i==0) return false;
+        }
+        return true;
+        
+    }
+    public void PrimosxNivel(JTextArea jta)
+    {
+        Queue<Nodo> colap=new LinkedList();
+        Queue<Nodo> colah=new LinkedList();
+        Stack<Integer> pilaresultante=new Stack();
+        
+        Nodo aux=null;
+        colap.add(raiz);
+        while(!colap.isEmpty())
+        {
+            aux=colap.poll();
+            //Aqui ingresamos a la pila los elementos primos
+            for (int i = 1; i <=aux.CantOcupados(); i++) {
+                if(esPrimo(aux.getElem(i)))
+                    pilaresultante.add(aux.getElem(i));
+                
+            }
+            //Este for es para ingressar lo shijos a la cola de ihijos
+            for (int i = 1; i <= aux.M; i++) {
+                
+                if(aux.getHijo(i)!=null)
+                {
+                    colah.add(aux.getHijo(i));
+                }
+                
+                
+            }
+            
+            if(colap.isEmpty())
+            {
+                while(!pilaresultante.isEmpty())
+                {
+                    jta.append(String.valueOf(pilaresultante.pop())+" ");
+                }
+                jta.append("\n");
+                colap=colah;
+                colah=new LinkedList();
+                
+                
+            }
+            
+            
+            
+            
+        }
+        
+        
+    }
     
     
     

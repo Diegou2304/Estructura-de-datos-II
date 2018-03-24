@@ -12,7 +12,7 @@ package arbolesm.vias;
 public class Nodo {
 //variables
 
-    public static int M = 3; //vias
+    public static int M = 4; //vias
     private int Elemento[];
     private Nodo Hijo[];
     private boolean Estado[];
