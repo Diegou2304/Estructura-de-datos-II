@@ -46,6 +46,7 @@
                   <Component id="CantidadArco" alignment="0" max="32767" attributes="0"/>
                   <Component id="MverticesAdyacentes" max="32767" attributes="0"/>
                   <Component id="BesConexo" max="32767" attributes="0"/>
+                  <Component id="CantIslas" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -85,6 +86,8 @@
                       <Component id="MverticesAdyacentes" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="BesConexo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="CantIslas" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="25" max="32767" attributes="0"/>
@@ -267,6 +270,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BesConexoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="CantIslas">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="CANTIDAD DE ISLAS"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CantIslasActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

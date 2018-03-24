@@ -44,6 +44,7 @@ public class Main extends javax.swing.JFrame {
         Vertices = new javax.swing.JTextField();
         MverticesAdyacentes = new javax.swing.JButton();
         BesConexo = new javax.swing.JButton();
+        CantIslas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,6 +130,13 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        CantIslas.setText("CANTIDAD DE ISLAS");
+        CantIslas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CantIslasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -152,7 +160,8 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(MuestreoMatriz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(CantidadArco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(MverticesAdyacentes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BesConexo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(BesConexo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CantIslas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -185,7 +194,9 @@ public class Main extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(MverticesAdyacentes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BesConexo)))
+                        .addComponent(BesConexo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(CantIslas)))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -256,18 +267,23 @@ public class Main extends javax.swing.JFrame {
     private void BesConexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BesConexoActionPerformed
         // TODO add your handling code here:
         Salida.setText(" ");
-        if(grafo.esConexo()) 
+       int dato=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el vertice de inicio:"));
+        
+        if(grafo.esConexo(dato)) 
         {
-            Salida.append("Iterativo:Es conexo\n");
+       
+            Salida.append("Iterativo:Es conexo\n "  );
         }
         else
         {
             Salida.append("Iterativo:No es conexo\n");
         }
-        if(grafo.esConexoRecursivo()) 
+        
+        if(grafo.esConexoRecursivo(dato)) 
             
         { 
-            Salida.append("Recursivo:Es conexo\n");
+        
+            Salida.append("Recursivo:Es conexo\n" );
         }
         else
         {
@@ -276,6 +292,12 @@ public class Main extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_BesConexoActionPerformed
+
+    private void CantIslasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CantIslasActionPerformed
+        // TODO add your handling code here:
+        Salida.setText(" ");
+        Salida.append(String.valueOf(grafo.CantidadIslas()));
+    }//GEN-LAST:event_CantIslasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -314,6 +336,7 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BesConexo;
+    private javax.swing.JButton CantIslas;
     private javax.swing.JButton CantidadArco;
     private javax.swing.JButton CrearVertice;
     private javax.swing.JButton InsertarArco;

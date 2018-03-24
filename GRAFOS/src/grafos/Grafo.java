@@ -179,11 +179,11 @@ public class Grafo {
         
     }
    
-    public boolean esConexo()
+    public boolean esConexo(int v)
     {
         int suma=0;
         
-        for (int i = 0; i < this.cantVertices(); i++) 
+        for (int i = v; i < this.cantVertices(); i++) 
         {
             for (int j = 0; j < this.cantVertices(); j++) 
             {
@@ -197,30 +197,60 @@ public class Grafo {
         return suma>=(this.cantVertices()-1)*2;
         
     }
-     public boolean esConexoRecursivo() {  //Recorrido en profundidad.
-        if (!esVerticeValido(0)) {
+     public boolean esConexoRecursivo(int v) {  //Recorrido en profundidad.
+        if (!esVerticeValido(v)) {
             return false;  //Validación. v no existe en el Grafo.
         }
         desmarcarTodos();
         
-        return esConexoRecursivo(0)==this.cantVertices();
+        return esConexoRecursivoP(v)==this.cantVertices();
     }
 
-    private int esConexoRecursivo(int v)//Basicamente recorremos el arbol en profundidad y solo verificamos que se halla recorrido todos los vertices 
-    {  //mask function 
+    private int esConexoRecursivoP(int v)//Basicamente recorremos el arbol en profundidad y solo verificamos que se halla recorrido todos los vertices 
+    {
+       
+        
+        //mask function 
         int acum=0;
         marcar(v);//Marcamos el primero
         for (int i = 0; i <= n; i++) {   //for (cada w adyacente a v)
-            if (M[v][i] ==1) {
+            if (M[v][i] >0) {
                 int w = i;
                 if (!esMarcado(w))//Verificamos para no volverlo a contar 
                 {
-                    acum+=esConexoRecursivo(w);
+                    acum+=esConexoRecursivoP(w);
                 }
             }
         }
         return acum+1;
+        
     }
-    
+    public int CantidadIslas()
+    {
+        this.desmarcarTodos();
+       return CantidadIslas(0);//Empezamos de 0 porque no importa donde empecemos
+        
+    }
+    private int CantidadIslas(int v)
+    {
+        if(!this.esVerticeValido(v))
+        {
+            return 0;
+        }
+        if(this.esMarcado(v)) 
+        {
+            return CantidadIslas(v+1);
+        }
+        if(!this.esConexoRecursivo(v))
+        {
+            
+            return 1+CantidadIslas(v+1);
+        }
+        else
+        {
+           return 0;
+        }
+        
+    }
     
 } //end class
