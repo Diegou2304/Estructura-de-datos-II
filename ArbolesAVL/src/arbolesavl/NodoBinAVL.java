@@ -21,6 +21,10 @@ public class NodoBinAVL{
         hijoDer=null;
         factorEquilibrio=0;
     }
+
+    NodoBinAVL() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     public void setFE(int i)
     {

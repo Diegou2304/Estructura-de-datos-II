@@ -140,6 +140,65 @@ public class ArbolAVL
         
         
     }
+    private NodoBinAVL InsertarBalanceado2(int d,NodoBinAVL P)
+    {
+        
+        NodoBinAVL nuevoPadre=new NodoBinAVL(d);
+        if(P==null)
+        {   
+            P=new NodoBinAVL(d);
+            P.setFE(this.FactorBalance(P));
+        }
+        if(P.getElem()>d)
+        {
+            P.setHI(InsertarBalanceado(d,P.getHI()));
+           
+            if(P.getFE()==2 && P.getHI().getFE()==1)
+            {
+                nuevoPadre= this.RotacionDerecha(P);
+            }
+            else 
+            {
+               nuevoPadre=this.RotacionIzquierdaDerecha(P);
+                
+            }
+            
+            
+            
+            
+            
+        }
+        else if(P.getElem()<d)
+        {
+            P.setHI(InsertarBalanceado(d,P.getHI()));
+             
+            if(P.getFE()==-2 && P.getHI().getFE()==-1)
+            {
+                nuevoPadre=this.RotacionIzquierda(P);
+            }
+            else 
+            {
+               nuevoPadre=this.RotacionDerechaIzquierda(P);
+                
+            }
+            
+            
+            
+            
+        }
+        
+                
+              
+        
+        
+        return nuevoPadre;
+    }
+    public void InsertarBalanceado2(int d)
+    {
+        
+        this.raiz=InsertarBalanceado(d,raiz);
+        
+    }
     private int FactorBalance(NodoBinAVL P)
     {
         return Altura(P.getHI())-Altura(P.getHD());

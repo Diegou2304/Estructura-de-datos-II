@@ -104,7 +104,7 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         int dato=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el numero"));
-        arbolavl.InsertarBalanceado(dato);
+        arbolavl.InsertarBalanceado2(dato);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
