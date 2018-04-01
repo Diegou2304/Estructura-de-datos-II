@@ -37,7 +37,7 @@ public class GrafosListasAdyacencia {
         grafo.InsertarArco(2, 3);
         grafo.DFS(0);
        System.out.println("\n");
-       grafo.BFS(0);
+       grafo.BFS(1);
     }
     
 }

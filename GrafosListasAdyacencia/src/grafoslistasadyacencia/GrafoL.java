@@ -110,23 +110,30 @@ public class GrafoL{
     {
        DesmarcarTodos();
       
-       Queue<Integer>x=new LinkedList();
-       x.add(verticeInicio);
-       listaCabeceras.get(verticeInicio).Marcar();
-       int aux;
-       Nodo aux2;
-       while(!x.isEmpty())
-       {
-           aux=x.poll();
-           aux2=listaCabeceras.get(aux);
-           System.out.print(aux+" ");
-           for (int i = 0; i < aux2.listaAdyacentes.size(); i++) {
-           if(!listaCabeceras.get(aux2.listaAdyacentes.get(i)).GetMarca())
-           {
-              x.add(aux2.listaAdyacentes.get(i)); 
-              listaCabeceras.get(aux2.listaAdyacentes.get(i)).Marcar();
-           }
-       }
+       Queue<Nodo> x=new LinkedList();
+      x.add(listaCabeceras.get(verticeInicio));
+      
+      listaCabeceras.get(verticeInicio).Marcar();
+      Nodo aux=null;
+      while(!x.isEmpty())
+      {
+          aux=x.poll();
+          System.out.print(aux.cabecera+" ");
+          
+          for (int i = 0; i < aux.listaAdyacentes.size(); i++) 
+          {
+              if(!esMarcado(aux.listaAdyacentes.get(i)))
+              {
+                  x.add(listaCabeceras.get(aux.listaAdyacentes.get(i)));
+                  listaCabeceras.get(aux.listaAdyacentes.get(i)).Marcar();
+              }
+              
+          }
+          
+          
+      }
+      
+      
    }
 
            
@@ -134,7 +141,7 @@ public class GrafoL{
         
         
         
-    }
+    
     
         
         
