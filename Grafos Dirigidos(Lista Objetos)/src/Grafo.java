@@ -77,6 +77,146 @@ public class Grafo
          
          
      }
+     public void ArcosEntrantes(String v, JTextArea jta)
+     {
+         int arconen=0;
+         jta.append("Arcos Entrantes de:"+v);
+         jta.append("\n");
+         Vertice ve;
+         Arco Arc;
+         for (int i = 0; i < LVertices.dim(); i++) {
+         ve=(Vertice)LVertices.getElem(i);
+         if(!ve.nombre.equals(v))
+            {  
+                for (int j = 0; j < ve.LArcos.dim(); j++) {
+                    Arc=(Arco)ve.LArcos.getElem(j);
+                    if(String.valueOf(Arc.getNombreVertD()).equals(v))
+                    {
+                        jta.append(v+"<---"+String.valueOf(ve.nombre)+"\n");
+                        arconen++;
+                        break;
+
+                    }
+
+                }
+            }
+         }
+         jta.append("\n");
+         jta.append("Cantidad de arcos entrantes:"+String.valueOf(arconen));
+         
+         
+         
+     }
+     public void MostrarVertices(JTextArea jta)
+     {
+        Vertice v;
+         
+         for (int i = 0; i < this.LVertices.dim(); i++) {
+         v=(Vertice)LVertices.getElem(i);
+             jta.append(v.nombre+" ");
+         
+         }
+         
+         
+         
+     }
+     public boolean esConexo(String vo)
+     {
+         
+          desmarcarTodos();
+          Vertice v=this.buscarVertice(vo);
+          this.ordenarVerticesAlf();
+         return esConexo(v)==this.LVertices.dim();
+         
+     }
+     private int esConexo(Vertice v)
+     {
+         
+         int contador=0;
+        v.marcado=true;
+        Arco a;
+        for (int i = 0; i < v.LArcos.dim(); i++) {
+            
+            a = (Arco) v.LArcos.getElem(i);
+            Vertice w = buscarVertice(a.getNombreVertD());
+            if(!w.marcado)
+                contador+=esConexo(w);
+            
+        }
+         
+         return contador+1;
+     }
+     public int CantidadIslas()
+     {
+         
+        Vertice v=(Vertice)this.LVertices.getElem(0);
+         this.desmarcarTodos();
+         int ci=CantidadIslas((this.buscarVertice(v.nombre)));
+         if(ci==0) return 1;
+         else
+         {
+             return ci;
+         }
+     }
+     private int  CantidadIslas(Vertice v)
+     {
+         
+         /*Vertice vertice;
+         int acumulador=0;
+         for (int i = 0; i < v.dim(); i++) {
+             vertice=(Vertice)this.LVertices.getElem(i);
+             if(!vertice.marcado)
+             {
+                //El problema que encontre es que cuanto tines a->b b->d y c solito entonces al momento de preguntar si c es conexo
+                 //desmarca D por lo tanto cuando le toca a D le suma el contador 1 esto solo pasa cuando
+                 //bueno cuando dejamos uno del medio sin relaciones como en este caso
+                 
+                if(!esConexo(vertice.nombre))//Hay un problema, el ultimo vertice no lo esta marcando cuando el grafo esta hecho bolsa
+                {
+                    
+                    acumulador+=1;
+                }
+             }
+             
+         }
+         
+         return acumulador;*/
+         if(v!=null)
+         {
+            if(v.marcado)
+            {
+                return CantidadIslas(this.nextVertice(v.nombre)); 
+            }
+            if(!this.esConexo(v.nombre))
+            {
+                return 1+CantidadIslas(this.nextVertice(v.nombre));
+            }
+            else
+            {
+                return 0;
+            }
+         }
+         else
+         {
+             return 0;
+         }
+         
+     }
+         
+     private Vertice nextVertice(String v)
+     {
+         Vertice f;
+         for (int i = 0; i < this.LVertices.dim(); i++) {
+             f=(Vertice)this.LVertices.getElem(i);
+             if(f.nombre.equals(v))
+             {
+                 f=(Vertice)this.LVertices.getElem(i+1);
+                 return f;
+                 
+             }
+         }
+         return null;
+     }
     
     public void desmarcarTodos() 
     {

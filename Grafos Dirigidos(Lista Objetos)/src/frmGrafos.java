@@ -24,6 +24,12 @@ public class frmGrafos extends javax.swing.JFrame {
         jButton9 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         barcosSalientes = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        svertices = new javax.swing.JTextArea();
+        barcosentrantes = new javax.swing.JButton();
+        bconexo = new javax.swing.JButton();
+        bcantidadislas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,6 +76,38 @@ public class frmGrafos extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Crear Vertice");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        svertices.setColumns(20);
+        svertices.setRows(5);
+        jScrollPane2.setViewportView(svertices);
+
+        barcosentrantes.setText("Arcos Entrantes");
+        barcosentrantes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                barcosentrantesActionPerformed(evt);
+            }
+        });
+
+        bconexo.setText("CONEXO");
+        bconexo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bconexoActionPerformed(evt);
+            }
+        });
+
+        bcantidadislas.setText("Cantidad de Islas");
+        bcantidadislas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bcantidadislasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -91,11 +129,17 @@ public class frmGrafos extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(ImprimirGrafo)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(barcosSalientes))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(barcosSalientes, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(barcosentrantes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(bconexo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(bcantidadislas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(147, 147, 147)
                         .addComponent(jLabel1)))
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,7 +152,18 @@ public class frmGrafos extends javax.swing.JFrame {
                         .addComponent(ImprimirGrafo)
                         .addComponent(barcosSalientes)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(barcosentrantes)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bconexo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bcantidadislas)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton9)
@@ -121,17 +176,10 @@ public class frmGrafos extends javax.swing.JFrame {
 
     private void btnCargarGrafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarGrafoActionPerformed
         // TODO add your handling code here:        
-        G.crearVertice("A");             
-        G.crearVertice("B");         
-        G.crearVertice("C");     
-        G.crearVertice("D");     
+            
         
-        G.insertarArco("A", "B", 2);
-        G.insertarArco("A", "D", 8);        
-        G.insertarArco("B", "C", 3);
-        G.insertarArco("B", "D", 4);        
-        G.insertarArco("C", "A", 5);
-        G.insertarArco("D", "C", 7);
+        G.insertarArco(JOptionPane.showInputDialog("Introduzca el vertice de origen:"),JOptionPane.showInputDialog("Introduzca el vertice de destino:") ,Integer.parseInt(JOptionPane.showInputDialog("Introduzca el costo:")));
+       
         
             
     }//GEN-LAST:event_btnCargarGrafoActionPerformed
@@ -161,8 +209,45 @@ public class frmGrafos extends javax.swing.JFrame {
     private void barcosSalientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barcosSalientesActionPerformed
         // TODO add your handling code here:
         jta.setText(" ");
-        G.ArcosSalientes("A", jta);
+        
+        G.ArcosSalientes(JOptionPane.showInputDialog("Introduzca el vertice:"), jta);
     }//GEN-LAST:event_barcosSalientesActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        
+        
+        svertices.setText(" ");
+        G.crearVertice(JOptionPane.showInputDialog("Introduzca el vertice:"));             
+       
+        G.MostrarVertices(svertices);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void barcosentrantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barcosentrantesActionPerformed
+        // TODO add your handling code here:
+        jta.setText(" ");
+        G.ArcosEntrantes(JOptionPane.showInputDialog("Introduzca el vertice:"), jta);
+        
+    }//GEN-LAST:event_barcosentrantesActionPerformed
+
+    private void bconexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bconexoActionPerformed
+        // TODO add your handling code here:
+        String vo=JOptionPane.showInputDialog("Introduzca el vertice de inicio");
+        if(G.esConexo(vo))
+        {
+            JOptionPane.showMessageDialog(null, "ES CONEXO");
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null,"NO ES CONEXO");
+        }
+    }//GEN-LAST:event_bconexoActionPerformed
+
+    private void bcantidadislasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bcantidadislasActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null,String.valueOf(G.CantidadIslas()));
+    }//GEN-LAST:event_bcantidadislasActionPerformed
 
     /**
     * @param args the command line arguments
@@ -178,12 +263,18 @@ public class frmGrafos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton ImprimirGrafo;
     private javax.swing.JButton barcosSalientes;
+    private javax.swing.JButton barcosentrantes;
+    private javax.swing.JButton bcantidadislas;
+    private javax.swing.JButton bconexo;
     private javax.swing.JToggleButton btnCargarGrafo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jta;
+    private javax.swing.JTextArea svertices;
     // End of variables declaration//GEN-END:variables
 
 }
