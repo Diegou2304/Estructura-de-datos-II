@@ -10,7 +10,7 @@ public class Vertice
             this.LArcos = new Lista();
             this.marcado=false;
         }      
-                
+        
         public void setNombre(String nom) {
             this.nombre = nom;
         }

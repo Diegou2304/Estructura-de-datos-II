@@ -120,86 +120,57 @@ public class Grafo
          
          
      }
-     public boolean esConexo(String vo)
+     public boolean esConexo()
      {
-         
+         boolean k=true;
           desmarcarTodos();
-          Vertice v=this.buscarVertice(vo);
-          this.ordenarVerticesAlf();
-         return esConexo(v)==this.LVertices.dim();
+          
+         for (int i = 0; i < this.LVertices.dim(); i++) {
+             Vertice v=(Vertice)this.LVertices.getElem(i);
+             
+             for (int j = 0; j < this.LVertices.dim(); j++) {
+                 Vertice w=(Vertice)this.LVertices.getElem(i);
+                 if(!existeCamino(v,w))
+                 {
+                     return false;
+                 }
+                 
+             }
+            
+             
+         }
+         return true;
          
      }
-     private int esConexo(Vertice v)
+    
+     
+     public int  CantidadIslas()
      {
-         
-         int contador=0;
+         Vertice v;
+         int islas=0;
+         this.desmarcarTodos();
+         for (int i = 0; i < this.LVertices.dim(); i++) {
+             v=(Vertice)this.LVertices.getElem(i);
+             if(!v.marcado)
+             {
+                 CantidadIslas(v);
+                 islas++;
+                 
+             }
+         }
+         return islas;
+     }
+     private void CantidadIslas(Vertice v)
+     {
+        
         v.marcado=true;
         Arco a;
         for (int i = 0; i < v.LArcos.dim(); i++) {
-            
             a = (Arco) v.LArcos.getElem(i);
             Vertice w = buscarVertice(a.getNombreVertD());
             if(!w.marcado)
-                contador+=esConexo(w);
-            
+            CantidadIslas(w);
         }
-         
-         return contador+1;
-     }
-     public int CantidadIslas()
-     {
-         
-        Vertice v=(Vertice)this.LVertices.getElem(0);
-         this.desmarcarTodos();
-         int ci=CantidadIslas((this.buscarVertice(v.nombre)));
-         if(ci==0) return 1;
-         else
-         {
-             return ci;
-         }
-     }
-     private int  CantidadIslas(Vertice v)
-     {
-         
-         /*Vertice vertice;
-         int acumulador=0;
-         for (int i = 0; i < v.dim(); i++) {
-             vertice=(Vertice)this.LVertices.getElem(i);
-             if(!vertice.marcado)
-             {
-                //El problema que encontre es que cuanto tines a->b b->d y c solito entonces al momento de preguntar si c es conexo
-                 //desmarca D por lo tanto cuando le toca a D le suma el contador 1 esto solo pasa cuando
-                 //bueno cuando dejamos uno del medio sin relaciones como en este caso
-                 
-                if(!esConexo(vertice.nombre))//Hay un problema, el ultimo vertice no lo esta marcando cuando el grafo esta hecho bolsa
-                {
-                    
-                    acumulador+=1;
-                }
-             }
-             
-         }
-         
-         return acumulador;*/
-         if(v!=null)
-         {
-            if(v.marcado)
-            {
-                return CantidadIslas(this.nextVertice(v.nombre)); 
-            }
-            if(!this.esConexo(v.nombre))
-            {
-                return 1+CantidadIslas(this.nextVertice(v.nombre));
-            }
-            else
-            {
-                return 0;
-            }
-         }
-         else
-         {
-             return 0;
-         }
          
      }
          
@@ -217,7 +188,13 @@ public class Grafo
          }
          return null;
      }
-    
+    //TAREA
+     //MOSTRAR LOS CAMINOS DE X A Y TODOS LOS CAMINOS POSIBLES
+     //A,B
+             //A,D,F
+     
+     
+     //MOSTRAR EL CAMINO MAS CORTO SI HAY EMPATE MOSTRAMOS EL QUE QUEREMOS, MOSTRAMOS EL COSTO Y LOS GRAFOS POR DONDE PASA
     public void desmarcarTodos() 
     {
        for(int i=0;i<this.LVertices.dim();i++){
@@ -235,6 +212,7 @@ public class Grafo
                 aux=(Vertice)LVertices.getElem(j);                
                 LVertices.setElem(v2, j);
                 LVertices.setElem(aux, j+1);                                                   
+        
             }      
         }  
       }
@@ -268,6 +246,7 @@ public class Grafo
     
     public void BFS(String s,JTextArea jta)
     {  
+         
        desmarcarTodos();
        ordenarVerticesAlf();
        Arco a;
@@ -292,7 +271,67 @@ public class Grafo
            }
        }while (!C.vacia());   
        jta.append("\n");
-    }   
-      
+    } 
+    public boolean existeCamino(String x, String y)
+    {
+        Arco a;
+        desmarcarTodos();
+        ordenarVerticesAlf();
+        Vertice vi = buscarVertice(x);
+        Vertice vd=buscarVertice(y);
+        
+        
+
+        
+        
+            
+            
+        return existeCamino(vi,vd);
+    }
+    private boolean existeCamino(Vertice vi, Vertice  vd)
+    {
+        //Me faltaba >:v el nombre vi 
+        if(vi.nombre.equals(vd.nombre) && this.buscarVerticeD(vi, vd)) return true;
+         
+        vi.marcado=true;
+        Arco a;
+        for (int i = 0; i < vi.LArcos.dim(); i++) {
+            a = (Arco) vi.LArcos.getElem(i);
+            Vertice w = buscarVertice(a.getNombreVertD());
+            if(!w.marcado)
+            {
+                if(existeCamino(w,vd))
+                {
+                    return true;
+                }
+                
+                
+            }
+            
+        }
+        
+            return false;
+       
+    }
+        
+        
+        
+       
     
+
+    private boolean buscarVerticeD(Vertice vi,Vertice vd)
+{
+            Arco a;
+            for (int i = 0; i < vi.LArcos.dim(); i++) {
+                a=(Arco)vi.LArcos.getElem(i);
+                if(a.getNombreVertD().equals(vi.nombre))
+                {
+                    return true;
+                }
+                
+            }
+            return false;
+           
+ }     
+
 }  //end class

@@ -30,6 +30,7 @@ public class frmGrafos extends javax.swing.JFrame {
         barcosentrantes = new javax.swing.JButton();
         bconexo = new javax.swing.JButton();
         bcantidadislas = new javax.swing.JButton();
+        bexistecamino = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,6 +109,13 @@ public class frmGrafos extends javax.swing.JFrame {
             }
         });
 
+        bexistecamino.setText("Existe Camino");
+        bexistecamino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bexistecaminoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -135,7 +143,8 @@ public class frmGrafos extends javax.swing.JFrame {
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(barcosentrantes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(bconexo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(bcantidadislas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                    .addComponent(bcantidadislas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(bexistecamino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(147, 147, 147)
                         .addComponent(jLabel1)))
@@ -163,7 +172,9 @@ public class frmGrafos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bconexo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bcantidadislas)))
+                        .addComponent(bcantidadislas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bexistecamino)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton9)
@@ -233,8 +244,8 @@ public class frmGrafos extends javax.swing.JFrame {
 
     private void bconexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bconexoActionPerformed
         // TODO add your handling code here:
-        String vo=JOptionPane.showInputDialog("Introduzca el vertice de inicio");
-        if(G.esConexo(vo))
+       
+        if(G.esConexo())
         {
             JOptionPane.showMessageDialog(null, "ES CONEXO");
         }
@@ -248,6 +259,16 @@ public class frmGrafos extends javax.swing.JFrame {
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(null,String.valueOf(G.CantidadIslas()));
     }//GEN-LAST:event_bcantidadislasActionPerformed
+
+    private void bexistecaminoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bexistecaminoActionPerformed
+        // TODO add your handling code here:
+        String vi=JOptionPane.showInputDialog("Introduzca el vertice de inicio:");
+        String vd=JOptionPane.showInputDialog("Introduzca el vertice de destino:");
+        boolean x=G.existeCamino(vi, vd);
+        if(x==true) JOptionPane.showMessageDialog(null,"Si hay camino");
+        else{
+        JOptionPane.showMessageDialog(null,"No hay camino");}
+    }//GEN-LAST:event_bexistecaminoActionPerformed
 
     /**
     * @param args the command line arguments
@@ -266,6 +287,7 @@ public class frmGrafos extends javax.swing.JFrame {
     private javax.swing.JButton barcosentrantes;
     private javax.swing.JButton bcantidadislas;
     private javax.swing.JButton bconexo;
+    private javax.swing.JButton bexistecamino;
     private javax.swing.JToggleButton btnCargarGrafo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
