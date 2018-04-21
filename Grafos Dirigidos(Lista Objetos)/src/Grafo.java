@@ -473,6 +473,7 @@ public class Grafo
   /*En resumen lo que hace esta funcion es, sumar recursivamente por nodo la cantidad de caminos que tiene cada uno hasta llegar a un nodo destino
   
   */
+  //Importante usar las marcas para que no existan caminos infinitos
     private int cantidadCaminos(Vertice vi, Vertice  vd)
     {
         int caminos=0;
@@ -480,7 +481,7 @@ public class Grafo
         Vertice v;
         vi.ordenarArcosAlf();
         
-        
+        vi.marcado=true;
         //Si el vertice de inicio no tiene arcos, retornamos 0 porque si no tiene arcos, no hay como llegue a algun nodo
         if(vi.LArcos.dim()==0) return 0;
         //Recorremos los arcos del vertice inicio
@@ -490,8 +491,9 @@ public class Grafo
             
             v=this.buscarVertice(arc.getNombreVertD());
             //Directamente, si un elemetno del arco del vertice de inicio no es igual al vertice de destino, llamamos la funcion de nuevo
-            if(!vd.nombre.equals(v.nombre))
+            if(!vd.nombre.equals(v.nombre) && !v.marcado)
             {
+                
                 caminos+=cantidadCaminos(v,vd);
             }
             //En caso de que exista el arco dentro, entonces tenemos que aumentar en 1 el numero de caminos porque significa que tiene una 
