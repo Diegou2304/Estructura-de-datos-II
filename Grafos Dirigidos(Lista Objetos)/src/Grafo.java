@@ -122,28 +122,81 @@ public class Grafo
      }
      public boolean esConexo()
      {
-         boolean k=true;
-          desmarcarTodos();
+         //Solo tenia que ordenar los vertices, cosa que olvide hacer
+         this.ordenarVerticesAlf();
           
          for (int i = 0; i < this.LVertices.dim(); i++) {
-             Vertice v=(Vertice)this.LVertices.getElem(i);
              
+             Vertice v=(Vertice)this.LVertices.getElem(i);
+            
              for (int j = 0; j < this.LVertices.dim(); j++) {
-                 Vertice w=(Vertice)this.LVertices.getElem(i);
-                 if(!existeCamino(v,w))
+                
+                 Vertice w=(Vertice)this.LVertices.getElem(j);
+                 if(i!=j)
                  {
-                     return false;
+                    if(!existeCamino(v.getNombre(),w.getNombre()))
+                    {
+
+                        return false;
+                    }
                  }
                  
              }
+             
             
              
          }
+         
+         
          return true;
          
      }
     
+     public boolean iguales(Grafo g1)
+     {
+         
+         if(this.LVertices.dim()!=g1.LVertices.dim()) return false;
+         
+         
+        desmarcarTodos();
+        ordenarVerticesAlf();
+        g1.ordenarVerticesAlf();
+        
+        return Iguales(g1);
+         
+         
+     }
      
+     private boolean Iguales(Grafo g1)
+     {
+         Vertice v1,v2;
+         Arco arc1,arc2;
+         for (int i = 0; i < this.LVertices.dim(); i++) 
+         {
+             v1=(Vertice)this.LVertices.getElem(i);
+             v2=(Vertice)g1.LVertices.getElem(i);
+             
+             if(!v2.nombre.equals(v1.nombre))
+                 return false;
+             v1.ordenarArcosAlf();
+             v2.ordenarArcosAlf();
+             for (int j = 0; j <v1.LArcos.dim(); j++) 
+             {
+                 arc1=(Arco)v1.LArcos.getElem(j);
+                 arc2=(Arco)v2.LArcos.getElem(j);
+                 if(!arc1.getNombreVertD().equals(arc2.getNombreVertD()))
+                 {
+                     return false;
+                 }
+             }
+             
+         }
+         return true;
+         
+         
+         
+         
+     }
      public int  CantidadIslas()
      {
          Vertice v;
@@ -232,6 +285,10 @@ public class Grafo
     }
 
     private void dfs(Vertice v, JTextArea jta){
+        
+        
+            
+        
         jta.append(v.getNombre() + " ");
         v.marcado=true;
         Arco a;
@@ -240,7 +297,9 @@ public class Grafo
             Vertice w = buscarVertice(a.getNombreVertD());
             if(!w.marcado)
             dfs(w, jta);
-        }
+            }
+        
+        
     }
     
     
@@ -281,6 +340,7 @@ public class Grafo
         Vertice vd=buscarVertice(y);
         
         
+        
 
         
         
@@ -291,15 +351,18 @@ public class Grafo
     private boolean existeCamino(Vertice vi, Vertice  vd)
     {
         //Me faltaba >:v el nombre vi 
-        if(vi.nombre.equals(vd.nombre) && this.buscarVerticeD(vi, vd)) return true;
+        
+        
          
         vi.marcado=true;
         Arco a;
         for (int i = 0; i < vi.LArcos.dim(); i++) {
             a = (Arco) vi.LArcos.getElem(i);
             Vertice w = buscarVertice(a.getNombreVertD());
+            if(w.nombre.equals(vd.nombre)) return true;
             if(!w.marcado)
             {
+                
                 if(existeCamino(w,vd))
                 {
                     return true;
@@ -310,13 +373,63 @@ public class Grafo
             
         }
         
+        
             return false;
        
     }
         
         
         
-       
+       public void caminosExistentes(JTextArea jta,String vo, String vd)
+       {
+           desmarcarTodos();
+           ordenarVerticesAlf();
+           Vertice vi=this.buscarVertice(vo);
+           Vertice vf=this.buscarVertice(vd);
+           Vertice w;
+           if(existeCamino(vo, vd))
+               {
+                   
+                   for (int i = 0; i < vi.LArcos.dim(); i++) 
+                    {
+                        Arco arc=(Arco)vi.LArcos.getElem(i);
+                        w=this.buscarVertice(arc.getNombreVertD());
+               
+                        desmarcarTodos();
+                        jta.append(vo+"-");
+                        jta.append(w.nombre+"-");
+                        caminosExistentes(jta,w,vf);
+                         jta.append(vf.nombre);
+                        jta.append("\n");
+                       
+               
+               
+               
+                    }
+           
+                   
+                   
+               }
+           
+           
+           
+       }
+       private void caminosExistentes(JTextArea jta,Vertice vi, Vertice vf)
+       {
+           
+           for (int i = 0; i < vi.LArcos.dim(); i++) {
+             Arco arc=(Arco)vi.LArcos.getElem(i);
+             Vertice aux=buscarVertice(arc.getNombreVertD());
+             if(existeCamino(aux.nombre,vf.nombre))
+             {
+                 jta.append(aux.getNombre()+"-");
+                 caminosExistentes(jta,aux,vf);
+             }
+               
+           }
+           
+           
+       }
     
 
     private boolean buscarVerticeD(Vertice vi,Vertice vd)
@@ -333,5 +446,74 @@ public class Grafo
             return false;
            
  }     
+    
+  public int cantidadCaminos(String x, String y)
+    {
+        Arco a;
+        desmarcarTodos();
+        ordenarVerticesAlf();
+        Vertice vi = buscarVertice(x);
+        vi.ordenarArcosAlf();
+        Vertice vd=buscarVertice(y);
+        
+        vd.ordenarArcosAlf();
+        
+
+        
+        
+            
+            
+        return cantidadCaminos(vi,vd);
+    }
+    //public subgrafo(grafo g1)
+  //public bool unicocamino(string x, string y)
+  //public int cantidadCaminos(string x, string y
+//public bool verificarSiesArbol2()  
+  
+  /*En resumen lo que hace esta funcion es, sumar recursivamente por nodo la cantidad de caminos que tiene cada uno hasta llegar a un nodo destino
+  
+  */
+    private int cantidadCaminos(Vertice vi, Vertice  vd)
+    {
+        int caminos=0;
+        Arco arc;
+        Vertice v;
+        vi.ordenarArcosAlf();
+        
+        
+        //Si el vertice de inicio no tiene arcos, retornamos 0 porque si no tiene arcos, no hay como llegue a algun nodo
+        if(vi.LArcos.dim()==0) return 0;
+        //Recorremos los arcos del vertice inicio
+        for (int i = 0; i < vi.LArcos.dim(); i++) 
+        {
+            arc=(Arco)vi.LArcos.getElem(i);
+            
+            v=this.buscarVertice(arc.getNombreVertD());
+            //Directamente, si un elemetno del arco del vertice de inicio no es igual al vertice de destino, llamamos la funcion de nuevo
+            if(!vd.nombre.equals(v.nombre))
+            {
+                caminos+=cantidadCaminos(v,vd);
+            }
+            //En caso de que exista el arco dentro, entonces tenemos que aumentar en 1 el numero de caminos porque significa que tiene una 
+            //Conexion directa con el vertice de destino+//No llamamos la funcion recursivamente, porque no nos importa sus arcos salientes
+            if(vd.nombre.equals(v.nombre)) caminos++;
+        }
+       
+       return caminos;
+    }
+    
+    public boolean unicoCamino(String x, String y)
+    {
+        if(this.cantidadCaminos(buscarVertice(x),buscarVertice(y))==1)
+                {
+                    return true;
+                    
+                }
+        else
+        {
+            return false;
+        }
+    }
+    
 
 }  //end class

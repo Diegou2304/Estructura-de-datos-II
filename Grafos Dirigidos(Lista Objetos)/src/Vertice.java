@@ -49,6 +49,8 @@ public class Vertice
                 i++;
             }
         }    
+        
+        
 
         public void ordenarArcosAlf() {
           Arco aux; Arco a1; Arco a2;

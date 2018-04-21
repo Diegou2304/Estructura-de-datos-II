@@ -31,6 +31,14 @@ public class frmGrafos extends javax.swing.JFrame {
         bconexo = new javax.swing.JButton();
         bcantidadislas = new javax.swing.JButton();
         bexistecamino = new javax.swing.JButton();
+        bcaminosexistentes = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        bcrearvertice = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        svertice2 = new javax.swing.JTextArea();
+        jButton3 = new javax.swing.JButton();
+        bcantidadcaminos = new javax.swing.JButton();
+        bunicocamino = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,6 +124,53 @@ public class frmGrafos extends javax.swing.JFrame {
             }
         });
 
+        bcaminosexistentes.setText("Caminos Existentes");
+        bcaminosexistentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bcaminosexistentesActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Leer Grafo 2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        bcrearvertice.setText("Crear Vertice 2");
+        bcrearvertice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bcrearverticeActionPerformed(evt);
+            }
+        });
+
+        svertice2.setColumns(20);
+        svertice2.setRows(5);
+        svertice2.setAutoscrolls(false);
+        jScrollPane3.setViewportView(svertice2);
+
+        jButton3.setText("Son Iguales");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        bcantidadcaminos.setText("Cantidad de Caminos");
+        bcantidadcaminos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bcantidadcaminosActionPerformed(evt);
+            }
+        });
+
+        bunicocamino.setText("Unico Camino");
+        bunicocamino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bunicocaminoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,11 +179,13 @@ public class frmGrafos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(bunicocamino, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,11 +201,20 @@ public class frmGrafos extends javax.swing.JFrame {
                                     .addComponent(barcosentrantes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(bconexo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(bcantidadislas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(bexistecamino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                    .addComponent(bexistecamino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(bcaminosexistentes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(bcantidadcaminos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bcrearvertice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(147, 147, 147)
                         .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,27 +225,41 @@ public class frmGrafos extends javax.swing.JFrame {
                     .addComponent(btnCargarGrafo, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(ImprimirGrafo)
-                        .addComponent(barcosSalientes)))
+                        .addComponent(barcosSalientes)
+                        .addComponent(jButton2)
+                        .addComponent(jButton3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton9)
+                            .addComponent(jButton5))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(bcrearvertice))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
                         .addComponent(barcosentrantes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bconexo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bcantidadislas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bexistecamino)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton9)
-                    .addComponent(jButton5))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(bexistecamino)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bcaminosexistentes)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bcantidadcaminos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bunicocamino)
+                        .addGap(29, 29, 29))))
         );
 
         pack();
@@ -270,6 +350,65 @@ public class frmGrafos extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null,"No hay camino");}
     }//GEN-LAST:event_bexistecaminoActionPerformed
 
+    private void bcaminosexistentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bcaminosexistentesActionPerformed
+        // TODO add your handling code here:
+        jta.setText(" ");
+         String vi=JOptionPane.showInputDialog("Introduzca el vertice de inicio:");
+        String vd=JOptionPane.showInputDialog("Introduzca el vertice de destino:");
+        G.caminosExistentes(jta, vi, vd);
+    }//GEN-LAST:event_bcaminosexistentesActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+         H.insertarArco(JOptionPane.showInputDialog("Introduzca el vertice de origen:"),JOptionPane.showInputDialog("Introduzca el vertice de destino:") ,Integer.parseInt(JOptionPane.showInputDialog("Introduzca el costo:")));
+        
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void bcrearverticeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bcrearverticeActionPerformed
+        // TODO add your handling code here:
+         svertice2.setText(" ");
+        H.crearVertice(JOptionPane.showInputDialog("Introduzca el vertice:"));             
+       
+        H.MostrarVertices(svertice2);
+    }//GEN-LAST:event_bcrearverticeActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        if(G.iguales(H)) JOptionPane.showMessageDialog(null,"Si son iguales");
+        else
+        {
+            JOptionPane.showMessageDialog(null,"No son iguales");
+        }
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void bcantidadcaminosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bcantidadcaminosActionPerformed
+        // TODO add your handling code here:
+        
+        jta.setText(" ");
+        String vi=JOptionPane.showInputDialog("Introduzca el vertice de inicio:");
+        String vd=JOptionPane.showInputDialog("Introduzca el vertice de destino:");
+        jta.append(String.valueOf(G.cantidadCaminos(vi, vd)));
+    }//GEN-LAST:event_bcantidadcaminosActionPerformed
+
+    private void bunicocaminoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bunicocaminoActionPerformed
+        // TODO add your handling code here:
+        jta.setText(" ");
+        String vi=JOptionPane.showInputDialog("Introduzca el vertice de inicio:");
+        String vd=JOptionPane.showInputDialog("Introduzca el vertice de destino:");
+       if(G.unicoCamino(vi, vd))
+       {
+           jta.append("Si solo tiene un camino");
+       }
+       else
+       {
+           jta.append("Tiene mas de un recorrido");
+       }
+    }//GEN-LAST:event_bunicocaminoActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -285,17 +424,25 @@ public class frmGrafos extends javax.swing.JFrame {
     private javax.swing.JToggleButton ImprimirGrafo;
     private javax.swing.JButton barcosSalientes;
     private javax.swing.JButton barcosentrantes;
+    private javax.swing.JButton bcaminosexistentes;
+    private javax.swing.JButton bcantidadcaminos;
     private javax.swing.JButton bcantidadislas;
     private javax.swing.JButton bconexo;
+    private javax.swing.JButton bcrearvertice;
     private javax.swing.JButton bexistecamino;
     private javax.swing.JToggleButton btnCargarGrafo;
+    private javax.swing.JButton bunicocamino;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jta;
+    private javax.swing.JTextArea svertice2;
     private javax.swing.JTextArea svertices;
     // End of variables declaration//GEN-END:variables
 
