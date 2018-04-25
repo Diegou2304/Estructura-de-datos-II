@@ -368,7 +368,7 @@ public class frmGrafos extends javax.swing.JFrame {
         jta.setText(" ");
          String vi=JOptionPane.showInputDialog("Introduzca el vertice de inicio:");
         String vd=JOptionPane.showInputDialog("Introduzca el vertice de destino:");
-        G.caminosExistentes(jta, vi, vd);
+        G.MostrarCaminos(vi,vd,jta);
     }//GEN-LAST:event_bcaminosexistentesActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

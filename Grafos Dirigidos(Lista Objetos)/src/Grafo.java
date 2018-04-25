@@ -1,6 +1,7 @@
 
 import javax.swing.*;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.PriorityQueue;
 
 public class Grafo
@@ -290,6 +291,7 @@ public class Grafo
         
             
         
+        
         jta.append(v.getNombre() + " ");
         v.marcado=true;
         Arco a;
@@ -381,56 +383,7 @@ public class Grafo
         
         
         
-       public void caminosExistentes(JTextArea jta,String vo, String vd)
-       {
-           desmarcarTodos();
-           ordenarVerticesAlf();
-           Vertice vi=this.buscarVertice(vo);
-           Vertice vf=this.buscarVertice(vd);
-           Vertice w;
-           if(existeCamino(vo, vd))
-               {
-                   
-                   for (int i = 0; i < vi.LArcos.dim(); i++) 
-                    {
-                        Arco arc=(Arco)vi.LArcos.getElem(i);
-                        w=this.buscarVertice(arc.getNombreVertD());
-               
-                        desmarcarTodos();
-                        jta.append(vo+"-");
-                        jta.append(w.nombre+"-");
-                        caminosExistentes(jta,w,vf);
-                         jta.append(vf.nombre);
-                        jta.append("\n");
-                       
-               
-               
-               
-                    }
-           
-                   
-                   
-               }
-           
-           
-           
-       }
-       private void caminosExistentes(JTextArea jta,Vertice vi, Vertice vf)
-       {
-           
-           for (int i = 0; i < vi.LArcos.dim(); i++) {
-             Arco arc=(Arco)vi.LArcos.getElem(i);
-             Vertice aux=buscarVertice(arc.getNombreVertD());
-             if(existeCamino(aux.nombre,vf.nombre))
-             {
-                 jta.append(aux.getNombre()+"-");
-                 caminosExistentes(jta,aux,vf);
-             }
-               
-           }
-           
-           
-       }
+    
     
 
     private boolean buscarVerticeD(Vertice vi,Vertice vd)
@@ -492,10 +445,12 @@ public class Grafo
             
             v=this.buscarVertice(arc.getNombreVertD());
             //Directamente, si un elemetno del arco del vertice de inicio no es igual al vertice de destino, llamamos la funcion de nuevo
-            if(!vd.nombre.equals(v.nombre) && !v.marcado)
+            if(!vd.nombre.equals(v.nombre) && !v.marcado )
             {
                 
                 caminos+=cantidadCaminos(v,vd);
+                v.marcado=false;
+                
             }
             //En caso de que exista el arco dentro, entonces tenemos que aumentar en 1 el numero de caminos porque significa que tiene una 
             //Conexion directa con el vertice de destino+//No llamamos la funcion recursivamente, porque no nos importa sus arcos salientes
@@ -528,7 +483,52 @@ public class Grafo
         dijstra(vi,vd,jta);
     }
     
+  public void MostrarCaminos(String v, String vd, JTextArea jta)
+  {
+      desmarcarTodos();
+      Vertice vi=this.buscarVertice(v);
+      Vertice vf=this.buscarVertice(vd);
+      List<Vertice> lista=new LinkedList();
+      lista.add(vi);
+      MostrarCaminos(vi,vf,jta,lista);
+  }
+  private void MostrarCaminos(Vertice v, Vertice vd, JTextArea jta,List<Vertice> lista)
+  {
+      if(v.nombre.equals(vd.nombre))
+      {
+          for (int i = 0; i <lista.size(); i++) {
+              jta.append(lista.get(i).nombre+" ");
+          }
+          jta.append("\n");
+      }
+      else
+      {
+      
+        v.marcado=true;
+        Arco a;
+        for (int i = 0; i < v.LArcos.dim(); i++) {
+              a = (Arco) v.LArcos.getElem(i);
 
+              Vertice w = buscarVertice(a.getNombreVertD());
+              if(!w.marcado)
+              { 
+                  lista.add(w);
+                  MostrarCaminos(w,vd,jta,lista);
+                  lista.remove(w);
+                  w.marcado=false;
+
+              }
+
+            }
+      
+      }
+      
+  }
+    
+    
+
+    
+    
     //Dijstra llena todos los caminos posibles dado un nodo vertice
     private void dijstra(Vertice vi,Vertice vd,JTextArea jta)
     {
