@@ -1,6 +1,7 @@
 
 import javax.swing.*;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 
 public class Grafo
 {
@@ -498,7 +499,8 @@ public class Grafo
             }
             //En caso de que exista el arco dentro, entonces tenemos que aumentar en 1 el numero de caminos porque significa que tiene una 
             //Conexion directa con el vertice de destino+//No llamamos la funcion recursivamente, porque no nos importa sus arcos salientes
-            if(vd.nombre.equals(v.nombre)) caminos++;
+            if(vd.nombre.equals(v.nombre)) 
+             caminos++;
         }
        
        return caminos;
@@ -516,6 +518,101 @@ public class Grafo
             return false;
         }
     }
+    public void dijstra(String v,String vdestino,JTextArea jta)
+    {
+        Vertice vi=this.buscarVertice(v);
+        Vertice vd=this.buscarVertice(vdestino);
+        InicializarPrevios();
+        InicializarDistancia();
+        desmarcarTodos();
+        dijstra(vi,vd,jta);
+    }
     
+
+    //Dijstra llena todos los caminos posibles dado un nodo vertice
+    private void dijstra(Vertice vi,Vertice vd,JTextArea jta)
+    {
+        Vertice actual,adyacente;
+        float peso;
+        Arco arc;
+        PriorityQueue< Vertice > Q = new PriorityQueue<Vertice>();
+        //La distancia que hay entre el mismo nodo de inicio siempre es cero porque ya se encuentra ahi
+        vi.distancia=0;
+        Q.add(vi);
+        while(!Q.isEmpty())
+        {
+            //no estraemos solamente tomamos el valor del primer elemento
+            actual=Q.element();
+            //Lo removemos :v
+            Q.remove();
+            
+            if(actual.marcado) continue;//Si el vertice actual ya fue isitado ebtonces sigo sacando elemetnos de la cola
+            actual.marcado=true;//Marcamos como visitado
+            //Recorremos todos los vertices adyacentes del actual
+            for (int i = 0; i <actual.LArcos.dim(); i++) {
+                arc=(Arco)actual.LArcos.getElem(i);
+                adyacente=this.buscarVertice(arc.getNombreVertD());
+                peso=arc.getCosto();
+                //Si el adyacente a este no esta marcado estonces hacemos la relajacion
+                if(!adyacente.marcado)
+                {
+                    relajacion(actual,adyacente,peso,Q);
+                }
+            }
+            
+        }
+        float costo=0;
+        ImprimirCaminoMasCorto(vd,jta,costo);
+        costo=GetCostoCaminoMasCorto(vd,costo);
+        jta.append("\n");
+       jta.append("El camino mas corto tiene un costo de:"+String.valueOf(costo));
+    }
+    private float GetCostoCaminoMasCorto(Vertice vd,float costo)
+    {
+        int suma=0;
+         if(vd.previo!="null")
+            suma+=GetCostoCaminoMasCorto(this.buscarVertice(vd.previo),costo);
+       
+        return vd.distancia;
+        
+    }
+    private void ImprimirCaminoMasCorto(Vertice vd,JTextArea jta,float costo)
+    {
+        if(vd.previo!="null")
+            ImprimirCaminoMasCorto(this.buscarVertice(vd.previo),jta,costo);
+        jta.append(vd.nombre+" ");
+        costo+=vd.distancia;
+    }
+    //Este metodo simplemente actualiza las distancia entre el vertice actual y su adyacente, despues mete el adyacente a la cola de prioridad
+    private void relajacion(Vertice actual, Vertice adyacente, float peso,PriorityQueue<Vertice> Q)
+    {
+        //Si la distancia del origen al vertice actual + peso de su arista es menor a la distancia del origen al vertice adyacente
+        //El peso, es el costo que tiene el vertice adyacente al actual
+        if( actual.distancia + peso < adyacente.distancia ){
+            adyacente.distancia = actual.distancia + peso;  //relajamos el vertice actualizando la distancia
+            adyacente.previo = actual.nombre; //a su vez actualizamos el vertice previo
+            Q.add(adyacente); //agregamos adyacente a la cola de prioridad
+
+        
+        }
+    }
+    private void InicializarPrevios()
+    {
+        Vertice v;
+        for (int i = 0; i < this.LVertices.dim(); i++) {
+            v=(Vertice)this.LVertices.getElem(i);
+            v.previo="null";
+        }
+    }
+    //Inicializa la distancia de todos los vertices en infinito
+    private void InicializarDistancia()
+    {
+         Vertice v;
+        for (int i = 0; i < this.LVertices.dim(); i++) {
+            v=(Vertice)this.LVertices.getElem(i);
+            v.distancia=Float.POSITIVE_INFINITY;
+        }
+        
+    }
 
 }  //end class

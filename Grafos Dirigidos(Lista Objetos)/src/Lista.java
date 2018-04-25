@@ -10,6 +10,7 @@
             v = new Object[max];
             n = 0;
         }
+        
 
         public void dim(int d){
             n = d;

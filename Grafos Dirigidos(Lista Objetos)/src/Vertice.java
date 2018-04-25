@@ -1,14 +1,19 @@
 
-public class Vertice
+//Tuvimos que heredad de la clase Comparable para usar la cola de prioridad
+public class Vertice implements Comparable<Vertice>
 {
         String nombre;
         public Lista LArcos;
         boolean marcado;
+        float distancia;//Distancia mas corta desde vertice inicial a vertice con ID
+        String previo;//Esto almacena el id del vertice anterior sirve para la impresion
         
         public Vertice(String nom)   {
             this.nombre = nom;
             this.LArcos = new Lista();
             this.marcado=false;
+            this.distancia=Float.POSITIVE_INFINITY;
+            this.previo="null";
         }      
         
         public void setNombre(String nom) {
@@ -36,6 +41,11 @@ public class Vertice
         public void insertarArco(Arco arco) {
             LArcos.insertarUlt(arco);
         }
+        public int compareTo( Vertice other){              //es necesario definir un comparador para el correcto funcionamiento del PriorityQueue
+            if( this.distancia > other.distancia ) return 1;
+            if( this.distancia == other.distancia ) return 0;
+            return -1;
+}
 
         public void eliminarArco(String nombreVD) {
             int i = 0;
