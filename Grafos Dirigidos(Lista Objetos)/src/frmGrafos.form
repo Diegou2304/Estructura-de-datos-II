@@ -49,21 +49,21 @@
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                      <Component id="bunicocamino" min="-2" pref="245" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="barcosSalientes" max="32767" attributes="0"/>
-                      <Component id="jButton1" max="32767" attributes="0"/>
-                      <Component id="jScrollPane2" alignment="1" max="32767" attributes="0"/>
-                      <Component id="barcosentrantes" alignment="0" max="32767" attributes="0"/>
-                      <Component id="bconexo" alignment="0" max="32767" attributes="0"/>
-                      <Component id="bcantidadislas" alignment="0" max="32767" attributes="0"/>
-                      <Component id="bexistecamino" alignment="0" max="32767" attributes="0"/>
-                      <Component id="bcaminosexistentes" alignment="0" max="32767" attributes="0"/>
-                      <Component id="bcantidadcaminos" min="-2" pref="249" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="bcantarcosent" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="bunicocamino" alignment="1" min="-2" pref="245" max="-2" attributes="0"/>
+                      <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="barcosSalientes" max="32767" attributes="0"/>
+                          <Component id="jButton1" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" alignment="1" max="32767" attributes="0"/>
+                          <Component id="barcosentrantes" alignment="0" max="32767" attributes="0"/>
+                          <Component id="bconexo" alignment="0" max="32767" attributes="0"/>
+                          <Component id="bcantidadislas" alignment="0" max="32767" attributes="0"/>
+                          <Component id="bexistecamino" alignment="0" max="32767" attributes="0"/>
+                          <Component id="bcaminosexistentes" alignment="0" max="32767" attributes="0"/>
+                          <Component id="bcantidadcaminos" pref="249" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
@@ -71,7 +71,10 @@
                   <Component id="jButton2" max="32767" attributes="0"/>
                   <Component id="bcrearvertice" alignment="1" max="32767" attributes="0"/>
                   <Component id="jScrollPane3" alignment="1" max="32767" attributes="0"/>
-                  <Component id="bdijstra" min="-2" pref="252" max="-2" attributes="0"/>
+                  <Component id="bdijstra" pref="252" max="32767" attributes="0"/>
+                  <Component id="besarbolbinario" max="32767" attributes="0"/>
+                  <Component id="bsubgrafo" max="32767" attributes="0"/>
+                  <Component id="BIMPRIMIRGRAFO" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jButton3" min="-2" pref="151" max="-2" attributes="0"/>
@@ -92,7 +95,7 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="249" max="-2" attributes="0"/>
-                      <EmptySpace pref="38" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButton9" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -120,18 +123,32 @@
                           <Component id="barcosentrantes" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="bdijstra" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="bconexo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="bcantidadislas" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="bexistecamino" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="bcaminosexistentes" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="bcantidadcaminos" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="bunicocamino" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="bconexo" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="bcantidadislas" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="bcantarcosent" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="bexistecamino" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="bcaminosexistentes" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="bcantidadcaminos" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="bunicocamino" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                              <Component id="besarbolbinario" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="bsubgrafo" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="BIMPRIMIRGRAFO" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -331,6 +348,38 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bdijstraActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="besarbolbinario">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Es Arbol Binario"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="besarbolbinarioActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="bcantarcosent">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cantidad Arcos Entrantes"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bcantarcosentActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="bsubgrafo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Es SubGrafo"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bsubgrafoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BIMPRIMIRGRAFO">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="IMPRIMIR GRAFO 2"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BIMPRIMIRGRAFOActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

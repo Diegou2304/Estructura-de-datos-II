@@ -15,6 +15,7 @@ public class Grafo
     public void crearVertice(String nomV){
         LVertices.insertarUlt(new Vertice(nomV));
     }
+    //Retorna null si no lo encontro el vertice
 
     public Vertice buscarVertice(String nomV)
     {
@@ -229,6 +230,165 @@ public class Grafo
          
      }
          
+     public int CantidadVerticesFlotantes()
+     {
+         Vertice v;
+         int cant=0;
+         for (int i = 0; i < this.LVertices.dim(); i++) {
+             v=(Vertice)this.LVertices.getElem(i);
+             if(this.CantidadArcosEntrantes(v)==0 && v.LArcos.dim()==0)
+             {
+                 
+                 cant++;
+             }
+             
+             
+         }
+         return cant;
+     }
+     //Siemopre esta devolviendo 0
+     public int CantidadArcosEntrantes(Vertice v)
+     {
+          int arconen=0;
+         
+         Vertice ve;
+         Arco Arc;
+         for (int i = 0; i < LVertices.dim(); i++) {
+         ve=(Vertice)LVertices.getElem(i);
+         if(!ve.nombre.equals(v))
+            {  
+                for (int j = 0; j < ve.LArcos.dim(); j++) {
+                    Arc=(Arco)ve.LArcos.getElem(j);
+                    if(String.valueOf(Arc.getNombreVertD()).equals(v.nombre))
+                    {
+                        
+                        arconen++;
+                        break;
+
+                    }
+
+                }
+            }
+         }
+        return arconen;
+         
+         
+     }
+     public boolean esArbolBinario()
+     {
+         //Tengo que desmarcar cada vez que :v ponemos un nuevo nodo
+         Vertice v;
+         desmarcarTodos();
+         if(CantidadVerticesFlotantes()==1 && this.LVertices.dim()==1) return true;
+         desmarcarTodos();
+         if (CantidadVerticesFlotantes()>=1) return false;
+         
+         for (int i = 0; i < this.LVertices.dim(); i++) {
+            desmarcarTodos();    
+             v=(Vertice)this.LVertices.getElem(i);
+            
+             if(!esArbolBinario(v))
+                {
+                    
+                   return false;
+                }
+             
+             
+         }
+         return true;
+
+     }
+     
+     public boolean esSubGrafo(Grafo F)
+     {
+         //Hay un problema, cuando hay un vertice flotante que no es el principal lo acepta como sub grafo
+         this.ordenarVerticesAlf();
+         F.ordenarVerticesAlf();
+         F.desmarcarTodos();
+         this.desmarcarTodos();
+         Vertice v;
+         if(CantidadVerticesFlotantes()==1 && this.LVertices.dim()==1 && F.CantidadVerticesFlotantes()==1 && F.LVertices.dim()==1) return true;
+              desmarcarTodos();
+          if (F.CantidadVerticesFlotantes()>=1) return false;
+         for (int i = 0; i <F.LVertices.dim(); i++) {
+             v=(Vertice)F.LVertices.getElem(i);
+             if(!v.marcado)
+             {
+                 
+              
+                if(!esSubGrafo(v))
+                {
+                    return false;
+                }
+                
+             }
+         }
+         return true;
+     }
+     //El truco es empezar con el vertice del supuesto subgrafo
+     private boolean esSubGrafo(Vertice C)
+     {
+         //Buscamos el vertice de inicio en el grafo, si no existe retornamos false
+         Vertice vg=this.buscarVertice(C.nombre);
+         if(vg==null) return false;
+         vg.ordenarArcosAlf();
+         C.ordenarArcosAlf();
+         C.marcado=true;
+         Arco arc,arc2;
+         
+         for (int i = 0; i <C.LArcos.dim(); i++) {
+             arc=(Arco)C.LArcos.getElem(i);
+             arc2=(Arco)vg.LArcos.getElem(i);
+             if(arc==null || arc2==null) return false;
+             if(arc.getNombreVertD().equals(arc2.getNombreVertD()))
+             {
+                 
+                  if(this.buscarVertice(arc.getNombreVertD()).marcado) continue;
+                 this.buscarVertice(arc.getNombreVertD()).marcado=false;
+                 if(esSubGrafo(this.buscarVertice(arc.getNombreVertD())))
+                 {
+                     return true;
+                 }
+             }
+             else
+             {
+                 return false;
+             }
+         }
+         return true;
+         
+         
+     }
+     
+     private boolean esArbolBinario(Vertice v)
+     {
+        
+         
+        v.marcado=true;
+        Arco a;
+        if(v.LArcos.dim()>2 || this.CantidadArcosEntrantes(v)>1) return false;
+        
+        for (int i = 0; i < v.LArcos.dim(); i++) {
+            a = (Arco) v.LArcos.getElem(i);
+            Vertice w = buscarVertice(a.getNombreVertD());
+            if(!w.marcado)
+            {
+                
+               if(!esArbolBinario(w))
+               {
+                   
+                   return false; 
+               }
+            }
+            else
+            {
+                 return false;
+            }
+            
+        }
+        return true;
+     }
+     
      private Vertice nextVertice(String v)
      {
          Vertice f;

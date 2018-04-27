@@ -8,7 +8,7 @@ public class Vertice implements Comparable<Vertice>
         float distancia;//Distancia mas corta desde vertice inicial a vertice con ID
         String previo;//Esto almacena el id del vertice anterior sirve para la impresion
         
-        public Vertice(String nom)   {
+        public Vertice(String nom) {
             this.nombre = nom;
             this.LArcos = new Lista();
             this.marcado=false;
