@@ -464,8 +464,11 @@ public class frmGrafos extends javax.swing.JFrame {
        }
        else
        {
-           jta.append("Tiene mas de un recorrido");
+           
+           jta.append("Tiene mas de un recorrido O no tiene ninguno");
        }
+       //williamsigf
+       
     }//GEN-LAST:event_bunicocaminoActionPerformed
 
     private void bdijstraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bdijstraActionPerformed

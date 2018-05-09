@@ -181,6 +181,7 @@ public class Grafo
              
              if(!v2.nombre.equals(v1.nombre))
                  return false;
+             
              v1.ordenarArcosAlf();
              v2.ordenarArcosAlf();
              for (int j = 0; j <v1.LArcos.dim(); j++) 
@@ -191,6 +192,7 @@ public class Grafo
                  {
                      return false;
                  }
+                 if(arc1.getCosto()!=arc2.getCosto()) return false;
              }
              
          }
@@ -279,8 +281,10 @@ public class Grafo
          //Tengo que desmarcar cada vez que :v ponemos un nuevo nodo
          Vertice v;
          desmarcarTodos();
+         //Verificamos en caso de que solo haya un vertice que cuente como raiz
          if(CantidadVerticesFlotantes()==1 && this.LVertices.dim()==1) return true;
          desmarcarTodos();
+         //Si tiene mas vertices flotantes entonces no es arbol binario
          if (CantidadVerticesFlotantes()>=1) return false;
          
          for (int i = 0; i < this.LVertices.dim(); i++) {
@@ -307,9 +311,16 @@ public class Grafo
          F.desmarcarTodos();
          this.desmarcarTodos();
          Vertice v;
-         if(CantidadVerticesFlotantes()==1 && this.LVertices.dim()==1 && F.CantidadVerticesFlotantes()==1 && F.LVertices.dim()==1) return true;
+         Vertice aux,aux2;
+         aux=(Vertice)F.LVertices.getElem(0);
+         aux2=(Vertice)this.LVertices.getElem(0);
+         
+//Verificamos si la cantidad de flotantes es 1 y solo hay un vertice para los dos grafos
+         
+         if(CantidadVerticesFlotantes()==1 && this.LVertices.dim()==1 && F.CantidadVerticesFlotantes()==1 && F.LVertices.dim()==1 && aux2.nombre.equals(aux.nombre) ) return true;
               desmarcarTodos();
-          if (F.CantidadVerticesFlotantes()>=1) return false;
+              if(F.CantidadVerticesFlotantes()>this.CantidadVerticesFlotantes()) return false;
+          //if (F.CantidadVerticesFlotantes()>=1) return false;
          for (int i = 0; i <F.LVertices.dim(); i++) {
              v=(Vertice)F.LVertices.getElem(i);
              if(!v.marcado)
@@ -342,9 +353,10 @@ public class Grafo
              if(arc==null || arc2==null) return false;
              if(arc.getNombreVertD().equals(arc2.getNombreVertD()))
              {
-                 
+                 if(arc.getCosto()!=arc2.getCosto()) return false;
                   if(this.buscarVertice(arc.getNombreVertD()).marcado) continue;
                  this.buscarVertice(arc.getNombreVertD()).marcado=false;
+                 
                  if(esSubGrafo(this.buscarVertice(arc.getNombreVertD())))
                  {
                      return true;
@@ -366,11 +378,14 @@ public class Grafo
          
         v.marcado=true;
         Arco a;
+        //Verificamos la cantidad de arcos que tiene cada vertice quue no pueden ser mas de dos, y suus arcos entrantes tienen que ser 1
         if(v.LArcos.dim()>2 || this.CantidadArcosEntrantes(v)>1) return false;
         
         for (int i = 0; i < v.LArcos.dim(); i++) {
             a = (Arco) v.LArcos.getElem(i);
             Vertice w = buscarVertice(a.getNombreVertD());
+            //Si un arco ya esta marcado simplemente retornamos false, porque en un arbol solo hipoteticamente se pasa por un nodo solo una vez, 
+            //Si tiene marcados entonces significa que esta volviendo a un vertice que ya fue visitado
             if(!w.marcado)
             {
                 
@@ -624,10 +639,10 @@ public class Grafo
     public boolean unicoCamino(String x, String y)
     {
         if(this.cantidadCaminos(buscarVertice(x),buscarVertice(y))==1)
-                {
-                    return true;
+         {
+              return true;
                     
-                }
+         }
         else
         {
             return false;
@@ -661,9 +676,7 @@ public class Grafo
           }
           jta.append("\n");
       }
-      else
-      {
-      
+     
         v.marcado=true;
         Arco a;
         for (int i = 0; i < v.LArcos.dim(); i++) {
@@ -681,7 +694,7 @@ public class Grafo
 
             }
       
-      }
+      
       
   }
     
@@ -774,5 +787,5 @@ public class Grafo
         }
         
     }
-
+//Hay un caso cuando tenemos un verrtice flotante me retorna false, pero si el otro tiene vertice flotante el mismo igual me retorn a false
 }  //end class
